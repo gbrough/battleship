@@ -1,3 +1,8 @@
+Fixes
+ - Add row and column headers to the table.
+ - Change starting column from 0 to 1.
+
+
 1 player game. Player guesses location of 5 ships, limit of 10 tries
   - 64 total spaces, 17 occupied, 47 empty
 
