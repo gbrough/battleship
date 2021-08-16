@@ -1,7 +1,16 @@
-Fixes
- - Add row and column headers to the table.
- - Change starting column from 0 to 1.
+# Distractions/Rewards
+- 
 
+Requirements/Fixes:
+ - try/except input
+ - Row 0 not used
+ - Repeat guessing
+
+Legend:
+" " available to guess
+ S where you placed a ship
+ X is hit
+ - is miss
 
 1 player game. Player guesses location of 5 ships, limit of 10 tries
   - 64 total spaces, 17 occupied, 47 empty
