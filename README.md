@@ -1,11 +1,12 @@
 # Distractions/Rewards
-- 
+- best pomodoro app - 1 hr, pause, history, annote pomodoro sessions, mac/ipad
+
 
 Requirements/Fixes:
-- check_guess miss battleship
-- check_guess already choosen
-- check if any ships left, if not, end game
-
+- check if already choose miss - fails second time
+- Change function to ask for ship 1 and ship 2
+- Keep playing until all ships are destroyed
+- Add destroyer(2x) ship
 
 Legend:
 " " available to guess
@@ -22,12 +23,12 @@ ship types
   -Submarine, which has three holes
   -Destroyer, which has two holes
 
-Additional Games: 
+Additional Video Lessons: 
 1. 2 Player game - 2 players take turns shooting at each other
 2. Player plays against computer with a random guesses
 3. Improve AI
 
-Feature additions:
+Feature/Video lesson additions:
  - Add classes and objects
  - Base class ship
  - Derived class for each type of ship

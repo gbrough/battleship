@@ -70,7 +70,6 @@ guesses_board = [
     [' ', ' ', ' ', ' ', ' '],
 ]
 
-
 # Keep playing until we have 5 right guesses
 guesses = 0
 def new_func():
