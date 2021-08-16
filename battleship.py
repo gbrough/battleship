@@ -1,5 +1,3 @@
-#globals
-
 #initializing board
 board = []
 for x in range(1,9):
@@ -20,37 +18,33 @@ letters_to_numbers = {
     'D': 3,
     'E': 4,
 }
-def ship_column(board):
+def ship_column():
     ship_column = input("Enter the column of the ship A-H: ").upper()
-    if ship_column not in ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'):
-      print("Not an appropriate choice.")
-      ship_column(board)
-    else:
-      return letters_to_numbers[ship_column]
+    while ship_column not in ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'):
+        print("Not an appropriate choice.")
+        ship_column = input("Enter the column of the ship A-H: ").upper()
+    return letters_to_numbers[ship_column]
 
-def ship_row(board):
+def ship_row():
     ship_row = input("Enter the row of the ship 1-8: ")
-    if ship_row not in ('1', '2', '3', '4', '5', '6', '7', '8'):
+    while ship_row not in ('1', '2', '3', '4', '5', '6', '7', '8'):
         print("Not an appropriate choice.")
-        ship_row(board)
-    else:
-        return int(ship_row)
-
-def guess_row(board):
-    guess_row = input("Guess the row 1-8: ")
-    if guess_row not in ('1', '2', '3', '4', '5', '6', '7', '8'):
-        print("Not an appropriate choice.")
-        guess_row(board)
-    else:
-        return int(guess_row)
+        ship_row = input("Enter the row of the ship 1-8: ")
+    return int(ship_row) - 1
 
 def guess_column(board):
     guess_column = input("Guess the column A-H: ").upper()
-    if guess_column not in ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'):
+    while guess_column not in ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'):
         print("Not an appropriate choice.")
-        guess_column(board)
-    else:
-        return letters_to_numbers[guess_column]
+        guess_column = input("Guess the column A-H: ").upper()
+    return letters_to_numbers[guess_column]
+
+def guess_row(board):
+    guess_row = input("Guess the row 1-8: ")
+    while guess_row not in ('1', '2', '3', '4', '5', '6', '7', '8'):
+        print("Not an appropriate choice.")
+        guess_row = input("Guess the row 1-8: ")
+    return int(guess_row) - 1
 
 def check_guess(board, ship_column, ship_row, guess_column, guess_row):
     if guess_row == ship_row and guess_column == ship_column:
@@ -67,12 +61,16 @@ def check_guess(board, ship_column, ship_row, guess_column, guess_row):
             board[guess_row][guess_column] = "-"
             print_board(board)
             return False
-SHIP_COLUMN = ship_column(board)
-SHIP_ROW = ship_row(board)
-while True:
+SHIP_COLUMN = ship_column()
+SHIP_ROW = ship_row()
+turns = 5
+while turns > 0:
     print_board(board)
+    print('You have ' + str(turns) + ' turns remaining.')
     GUESS_COLUMN = guess_column(board)
     GUESS_ROW = guess_row(board)
     check_guess(board, SHIP_COLUMN, SHIP_ROW, GUESS_COLUMN, GUESS_ROW)
-
+    turns = turns - 1
+    if turns == 0:
+        print("Sorry, You ran out of turns. The game is over")
 
