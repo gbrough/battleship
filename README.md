@@ -1,25 +1,27 @@
 # Distractions/Rewards
-- filter meetups
+- create video of basic 1 player game
 
 Fixes:
-- hits are not workings
+- crashes when nothing entered
 
 Requirements:
-- Keep playing until all ships hit
-
+- computer randomly places 5 ships
 
 Legend:
 " " available to guess
- S where you placed a ship
- X is hit
+ X where you placed a ship on board
+ X is hit on guess board
  - is miss
 
 Game types/videos: 
-1. 1 player game. Player guesses location of 5 single ships, limit of 10 tries
-2. Add 5 different ship types(class and dictionaries?)
-3. Player plays against computer with a random guesses
+1. 1 player game. 
+   - Computer randomly places 5 ships, player has 10 guesses
+2. Advanced 1 player game.
+   - player and computer places ships, both guess
+3. Add 5 different ship types(classes and dictionaries)
 4. Improve AI
-5. 2 Player game - 2 players take turns shooting at each other
+   - If hit, play adjacent to ship
+
 
 Ship types
   -Carrier, which has five holes
