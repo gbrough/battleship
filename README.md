@@ -1,12 +1,13 @@
 # Distractions/Rewards
-- best pomodoro app - 1 hr, pause, history, annote pomodoro sessions, mac/ipad
+- filter meetups
 
+Fixes:
+- ship1 and ship2 cannot be the same location
+- check if already choose miss - fails second time
 
 Requirements/Fixes:
-- check if already choose miss - fails second time
-- Change function to ask for ship 1 and ship 2
-- Keep playing until all ships are destroyed
-- Add destroyer(2x) ship
+- Keep playing until both destroyed
+
 
 Legend:
 " " available to guess
@@ -14,19 +15,19 @@ Legend:
  X is hit
  - is miss
 
-1 player game. Player guesses location of 5 ships, limit of 10 tries
+Game types/videos: 
+1. 1 player game. Player guesses location of 5 single ships, limit of 10 tries
+2. Add 5 different ship types(class and dictionaries?)
+3. Player plays against computer with a random guesses
+4. Improve AI
+5. 2 Player game - 2 players take turns shooting at each other
 
-ship types
+Ship types
   -Carrier, which has five holes
   -Battleship, which has four holes
   -Cruiser, which has three holes
   -Submarine, which has three holes
   -Destroyer, which has two holes
-
-Additional Video Lessons: 
-1. 2 Player game - 2 players take turns shooting at each other
-2. Player plays against computer with a random guesses
-3. Improve AI
 
 Feature/Video lesson additions:
  - Add classes and objects
