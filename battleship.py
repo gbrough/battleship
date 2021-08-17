@@ -1,3 +1,5 @@
+from random import randint
+
 #Board for holding ship locations
 board = []
 for x in range(1,9):
@@ -27,34 +29,27 @@ letters_to_numbers = {
     'H': 7
 }
 def get_ship_location():
-    column = input("Enter the column of the ship: ").upper()
     try:
+        row = input("Enter the row of the ship: ").upper()
+        while row not in "12345678":
+            print('Not an appropriate choice, please select a valid row')
+            row = input("Enter the row of the ship: ").upper()
+        column = input("Enter the column of the ship: ").upper()
         while column not in "ABCDEFGH":
             print('Not an appropriate choice, please select a valid column')
             column = input("Enter the column of the ship: ").upper()
-        row = input("Enter the row of the ship: ").upper()
-        while row not in "123456789":
-            print('Not an appropriate choice, please select a valid row')
-            row = input("Enter the row of the ship: ").upper()
         return int(row) - 1, letters_to_numbers[column]
-    except:
-        print("That's not a valid input, please try again")
-        get_ship_location()
+    except (ValueError, KeyError, IndexError, TypeError):
+        print("Not an appropriate choice, please select a valid row and column")
+        return get_ship_location()
 
-#Create 5 battleships
-def create_battleships():
-    ships = 5
-    print_board(board)
-    while ships > 0:
-        row, column = get_ship_location()
-        if board[row][column] == "X":
-            print("You already have a ship there, try again")
-            continue
-        else:
-            board[row][column] = "X"
-            ships -= 1
-            print_board(board)
-            print('You have ' + str(ships) + ' ships left')
+#computer create 5 ships
+def create_ships():
+    for ship in range(5):
+        ship_row, ship_column = randint(0,7), randint(0,7)
+        while board[ship_row][ship_column] == "X":
+            ship_row, ship_column = get_ship_location()
+        board[ship_row][ship_column] = "X"
 
 #check if all ships are hit
 def count_hit_ships():
@@ -65,7 +60,7 @@ def count_hit_ships():
                 count += 1
     return count
 
-create_battleships()
+create_ships()
 turns = 10
 while turns > 0:
     print('Guess a battleship location')
