@@ -16,7 +16,7 @@ def print_board(board):
     row_number = 1
     for row in board:
         print("%d|%s|" % (row_number, "|".join(row)))
-        row_number = row_number + 1
+        row_number += 1
 
 letters_to_numbers = {
     'A': 0,
@@ -29,19 +29,16 @@ letters_to_numbers = {
     'H': 7
 }
 def get_ship_location():
-    try:
+    row = input("Enter the row of the ship: ").upper()
+    while row not in "12345678" or ValueError:
+        print('Not an appropriate choice, please select a valid row')
         row = input("Enter the row of the ship: ").upper()
-        while row not in "12345678":
-            print('Not an appropriate choice, please select a valid row')
-            row = input("Enter the row of the ship: ").upper()
+    column = input("Enter the column of the ship: ").upper()
+    while column not in "ABCDEFGH" or ValueError:
+        print('Not an appropriate choice, please select a valid column')
         column = input("Enter the column of the ship: ").upper()
-        while column not in "ABCDEFGH":
-            print('Not an appropriate choice, please select a valid column')
-            column = input("Enter the column of the ship: ").upper()
-        return int(row) - 1, letters_to_numbers[column]
-    except (ValueError, KeyError, IndexError, TypeError):
-        print("Not an appropriate choice, please select a valid row and column")
-        return get_ship_location()
+    return int(row) - 1, letters_to_numbers[column]
+
 
 #computer create 5 ships
 def create_ships():

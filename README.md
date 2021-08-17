@@ -7,8 +7,6 @@ Requirements:
 - 
 
 Teaching:
-- print board
-- except errors
 
 Legend:
 " " available to guess
