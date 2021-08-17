@@ -35,37 +35,39 @@ def get_ship_location():
     while row not in "123456789":
         print('Not an appropriate choice, please select a valid row')
         row = input("Enter the row of the ship: ").upper()
-    return letters_to_numbers[column], int(row) - 1
+    return int(row) - 1, letters_to_numbers[column]
 
 #Create 5 battleships
 def create_battleships():
+    ships = 5
     print_board(board)
-    for i in range(5):
-        
-        print('Where do you want your ' + str(i+1) + ' battleship?')
-        column, row = get_ship_location()
-        if board[column][row] == "X":
-            print("That ship already exists")   
+    while ships > 0:
+        row, column = get_ship_location()
+        if board[row][column] == "X":
+            print("You already have a ship there, try again")
+            continue
         else:
-            board[column][row] = "X"
-        print_board(board)
-        
+            board[row][column] = "X"
+            ships -= 1
+            print_board(board)
+            print('You have ' + str(ships) + ' ships left')
+
+create_battleships()
 turns = 5
 while turns > 0:
-    create_battleships()
     print('Guess a battleship location')
-    column, row = get_ship_location()
     print_board(guess_board)
-    if guess_board[column][row] == "-":
+    row, column = get_ship_location()
+    print_board(guess_board)
+    if guess_board[row][column] == "-":
         print("You guessed that one already.")
-        continue
-    elif guess_board[column][row] == ' ':
+    elif guess_board[row][column] == ' ':
         print("MISS!")
-        guess_board[column][row] = "-"
+        guess_board[row][column] = "-"
     else:
-        board[column][row] = "X"
+        board[row][column] = "X"
         print("Hit")
-        guess_board[column][row] = "X"
+        guess_board[row][column] = "X"
     turns -= 1
     if turns == 0:
         print("You ran out of turns")

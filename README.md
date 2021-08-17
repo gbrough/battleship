@@ -2,11 +2,10 @@
 - filter meetups
 
 Fixes:
-- ship1 and ship2 cannot be the same location
-- check if already choose miss - fails second time
+- hits are not workings
 
-Requirements/Fixes:
-- Keep playing until both destroyed
+Requirements:
+- Keep playing until all ships hit
 
 
 Legend:
