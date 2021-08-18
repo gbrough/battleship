@@ -4,7 +4,16 @@
 Fixes:
 
 Requirements:
-- 
+- function - computer generate 5 ships randomly on computer board 
+- function - player generate 5 ships on player board
+- main - player guesses on computer board 
+- # create function to create all boards
+- # create and display computer guess board
+- # create and display player guess board
+
+- main - computer guesses on player board, and marks misses
+- main - computer guesses randomly
+- main - 1st to sink 5 ships wins
 
 Teaching:
 
@@ -20,7 +29,6 @@ Game types/videos:
   - player and computer places ships, both guess
   - player places 5 ships, computer places 5 ships
   - take turns guessing, whichever one hits all five first wins
-
 3. Improve AI
   - If hit, computer plays adjacent to ship
 4. Add 5 different ship types

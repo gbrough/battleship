@@ -1,16 +1,30 @@
+
+
 from random import randint
-
-#Board for holding ship locations
-board = []
+#create board function
+def create_board():
+    
+#Board for holding computer ship locations
+computer_board = []
 for x in range(1,9):
-    board.append([" "] * 8)
+    computer_board.append([" "] * 8)
 
-# Board for displaying hits and misses
-guess_board = []
+# Board for holding player ships
+player_board = []
 for x in range(1,9):
-    guess_board.append([" "] * 8)
+    player_board.append([" "] * 8)
 
-def print_board(board):
+# Create guess board to show player misses and hits agains computer
+player_guess_board = []
+for x in range(1,9):
+    player_guess_board.append([" "] * 8)
+
+#create a guess board for computer to check for hits and misses
+computer_guess_board = []
+for x in range(1,9):
+    computer_guess_board.append([" "] * 8)
+
+def print_board():
     print("  A B C D E F G H")
     print("  +-+-+-+-+-+-+-+")
     row_number = 1
@@ -41,41 +55,67 @@ def get_ship_location():
 
 
 #computer create 5 ships
-def create_ships():
+def computer_create_ships():
     for ship in range(5):
         ship_row, ship_column = randint(0,7), randint(0,7)
-        while board[ship_row][ship_column] == "X":
+        while computer_board[ship_row][ship_column] == "X":
             ship_row, ship_column = get_ship_location()
-        board[ship_row][ship_column] = "X"
+        computer_board[ship_row][ship_column] = "X"
+#player creates 5 ships
+def player_create_ships():
+    for ship in range(5):
+        ship_row, ship_column = get_ship_location()
+        while player_board[ship_row][ship_column] == "X":
+            print("That location is already taken, choose another")
+            ship_row, ship_column = get_ship_location()
+        player_board[ship_row][ship_column] = "X"
 
 #check if all ships are hit
 def count_hit_ships():
-    count = 0
-    for row in guess_board:
+    computer_count = 0
+    for row in computer_board:
         for column in row:
             if column == "X":
-                count += 1
-    return count
+                computer_count += 1
+    player_count = 0
+    for row in player_board:
+        for column in row:
+            if column == "X":
+                player_count += 1
+    return computer_count, player_count
 
-create_ships()
-turns = 10
-while turns > 0:
-    print('Guess a battleship location')
-    print_board(guess_board)
-    row, column = get_ship_location()
-    if guess_board[row][column] == "-":
-        print("You guessed that one already.")
-    elif board[row][column] == "X":
-        print("Hit")
-        guess_board[row][column] = "X"   
-    else:
-        guess_board[row][column] == ' '
-        print("MISS!")
-        guess_board[row][column] = "-"   
-        turns -= 1     
-    if count_hit_ships() == 5:
-        print("You win!")
+computer_create_ships()
+player_create_ships()
+while True:
+    #player turn
+    while True:
+        print('Guess a battleship location')
+        print_board(computer_board)
+        row, column = get_ship_location()
+        if computer_board[row][column] == "-":
+            print("You guessed that one already.")
+        elif computer_board[row][column] == "X":
+            print("Hit")
+            computer_board[row][column] = "X"  
+            break 
+        else:
+            computer_board[row][column] == ' '
+            print("MISS!")
+            computer_board[row][column] = "-" 
+            break     
+    #computer turn
+    while True:
+        row, column = randint(1,9), randint(1,9)
+        if player_board[row][column] == "-":
+            row, column = get_ship_location()
+        elif player_board[row][column] == "X":
+            row, column = randint(1,9), randint(1,9)
+        else:
+            player_board[row][column] = 'X'
+            break
+    if count_hit_ships()[0] == 5:
+        print("Computer win!")
         break
-    print("You have " + str(turns) + " turns left")
-    if turns == 0:
-        print("You ran out of turns")
+    elif count_hit_ships()[1] == 5:
+        print("Player win!")
+        break
