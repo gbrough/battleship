@@ -18,6 +18,9 @@ Game types/videos:
   - Computer randomly places 5 ships, player has 10 guesses
 2. Advanced 1 player game.
   - player and computer places ships, both guess
+  - player places 5 ships, computer places 5 ships
+  - take turns guessing, whichever one hits all five first wins
+
 3. Improve AI
   - If hit, computer plays adjacent to ship
 4. Add 5 different ship types
