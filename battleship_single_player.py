@@ -1,14 +1,9 @@
 from random import randint
 
 #Board for holding ship locations
-board = []
-for x in range(1,9):
-    board.append([" "] * 8)
-
+HIDDEN_BOARD = [[" "] * 8 for x in range(1,9)]
 # Board for displaying hits and misses
-guess_board = []
-for x in range(1,9):
-    guess_board.append([" "] * 8)
+GUESS_BOARD = [[" "] * 8 for i in range(1,9)]
 
 def print_board(board):
     print("  A B C D E F G H")
@@ -39,9 +34,8 @@ def get_ship_location():
         column = input("Enter the column of the ship: ").upper()
     return int(row) - 1, letters_to_numbers[column]
 
-
 #computer create 5 ships
-def create_ships():
+def create_ships(board):
     for ship in range(5):
         ship_row, ship_column = randint(0,7), randint(0,7)
         while board[ship_row][ship_column] == "X":
@@ -49,31 +43,30 @@ def create_ships():
         board[ship_row][ship_column] = "X"
 
 #check if all ships are hit
-def count_hit_ships():
+def count_hit_ships(board):
     count = 0
-    for row in guess_board:
+    for row in board:
         for column in row:
             if column == "X":
                 count += 1
     return count
 
-create_ships()
+create_ships(HIDDEN_BOARD)
 turns = 10
 while turns > 0:
     print('Guess a battleship location')
-    print_board(guess_board)
+    print_board(GUESS_BOARD)
     row, column = get_ship_location()
-    if guess_board[row][column] == "-":
+    if GUESS_BOARD[row][column] == "-":
         print("You guessed that one already.")
-    elif board[row][column] == "X":
+    elif HIDDEN_BOARD[row][column] == "X":
         print("Hit")
-        guess_board[row][column] = "X"   
+        GUESS_BOARD[row][column] = "X"   
     else:
-        guess_board[row][column] == ' '
         print("MISS!")
-        guess_board[row][column] = "-"   
+        GUESS_BOARD[row][column] = "-"   
         turns -= 1     
-    if count_hit_ships() == 5:
+    if count_hit_ships(GUESS_BOARD) == 5:
         print("You win!")
         break
     print("You have " + str(turns) + " turns left")

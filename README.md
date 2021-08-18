@@ -2,18 +2,10 @@
 - create video of basic 1 player game
 
 Fixes:
+- computer play, '-' index out of range
 
 Requirements:
-- function - computer generate 5 ships randomly on computer board 
-- function - player generate 5 ships on player board
-- main - player guesses on computer board 
-- # create function to create all boards
-- # create and display computer guess board
-- # create and display player guess board
-
-- main - computer guesses on player board, and marks misses
-- main - computer guesses randomly
-- main - 1st to sink 5 ships wins
+- 
 
 Teaching:
 

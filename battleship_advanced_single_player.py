@@ -1,30 +1,11 @@
-
-
 from random import randint
-#create board function
-def create_board():
-    
-#Board for holding computer ship locations
-computer_board = []
-for x in range(1,9):
-    computer_board.append([" "] * 8)
 
-# Board for holding player ships
-player_board = []
-for x in range(1,9):
-    player_board.append([" "] * 8)
+PLAYER_BOARD = [[" "] * 8 for i in range(1,9)]
+COMPUTER_BOARD = [[" "] * 8 for i in range(1,9)]
+PLAYER_GUESS_BOARD = [[" "] * 8 for i in range(1,9)]
+COMPUTER_GUESS_BOARD = [[" "] * 8 for i in range(1,9)]
 
-# Create guess board to show player misses and hits agains computer
-player_guess_board = []
-for x in range(1,9):
-    player_guess_board.append([" "] * 8)
-
-#create a guess board for computer to check for hits and misses
-computer_guess_board = []
-for x in range(1,9):
-    computer_guess_board.append([" "] * 8)
-
-def print_board():
+def print_board(board): 
     print("  A B C D E F G H")
     print("  +-+-+-+-+-+-+-+")
     row_number = 1
@@ -43,79 +24,77 @@ letters_to_numbers = {
     'H': 7
 }
 def get_ship_location():
-    row = input("Enter the row of the ship: ").upper()
-    while row not in "12345678" or ValueError:
+    row = input("Enter the row of the ship: ")
+    while row not in "12345678":
         print('Not an appropriate choice, please select a valid row')
-        row = input("Enter the row of the ship: ").upper()
+        row = input("Enter the row of the ship: ")
     column = input("Enter the column of the ship: ").upper()
-    while column not in "ABCDEFGH" or ValueError:
+    while column not in "ABCDEFGH":
         print('Not an appropriate choice, please select a valid column')
         column = input("Enter the column of the ship: ").upper()
     return int(row) - 1, letters_to_numbers[column]
 
-
 #computer create 5 ships
-def computer_create_ships():
+def computer_create_ships(board):
     for ship in range(5):
         ship_row, ship_column = randint(0,7), randint(0,7)
-        while computer_board[ship_row][ship_column] == "X":
+        while board[ship_row][ship_column] == "X":
             ship_row, ship_column = get_ship_location()
-        computer_board[ship_row][ship_column] = "X"
+        board[ship_row][ship_column] = "X"
 #player creates 5 ships
-def player_create_ships():
+def player_create_ships(board):
     for ship in range(5):
+        print_board(board)
         ship_row, ship_column = get_ship_location()
-        while player_board[ship_row][ship_column] == "X":
+        while board[ship_row][ship_column] == "X":
             print("That location is already taken, choose another")
             ship_row, ship_column = get_ship_location()
-        player_board[ship_row][ship_column] = "X"
+        board[ship_row][ship_column] = "X"
 
 #check if all ships are hit
-def count_hit_ships():
-    computer_count = 0
-    for row in computer_board:
+def count_hit_ships(board):
+    count = 0
+    for row in board:
         for column in row:
             if column == "X":
-                computer_count += 1
-    player_count = 0
-    for row in player_board:
-        for column in row:
-            if column == "X":
-                player_count += 1
-    return computer_count, player_count
+                count += 1
+    return count
 
-computer_create_ships()
-player_create_ships()
+computer_create_ships(COMPUTER_BOARD)
+print_board(COMPUTER_BOARD)
+#player_create_ships(PLAYER_BOARD)
 while True:
     #player turn
     while True:
         print('Guess a battleship location')
-        print_board(computer_board)
+        print_board(PLAYER_GUESS_BOARD)
         row, column = get_ship_location()
-        if computer_board[row][column] == "-":
+        if PLAYER_GUESS_BOARD[row][column] == "-":
             print("You guessed that one already.")
-        elif computer_board[row][column] == "X":
+        elif COMPUTER_BOARD[row][column] == "X":
             print("Hit")
-            computer_board[row][column] = "X"  
+            PLAYER_GUESS_BOARD[row][column] = "X"  
             break 
         else:
-            computer_board[row][column] == ' '
             print("MISS!")
-            computer_board[row][column] = "-" 
-            break     
+            PLAYER_GUESS_BOARD[row][column] = "-" 
+            break  
+    if count_hit_ships(PLAYER_GUESS_BOARD) == 5:
+        print("You win!")
+        break   
     #computer turn
     while True:
+        print_board(COMPUTER_GUESS_BOARD)
         row, column = randint(1,9), randint(1,9)
-        if player_board[row][column] == "-":
-            row, column = get_ship_location()
-        elif player_board[row][column] == "X":
+        if COMPUTER_GUESS_BOARD[row][column] == '-':
             row, column = randint(1,9), randint(1,9)
-        else:
-            player_board[row][column] = 'X'
+        elif PLAYER_BOARD[row][column] == "X":
+            COMPUTER_GUESS_BOARD[row][column] = "X"
             break
-    if count_hit_ships()[0] == 5:
-        print("Computer win!")
+        else:
+            COMPUTER_GUESS_BOARD[row][column] = '-'
+            break
+    if count_hit_ships(COMPUTER_GUESS_BOARD) == 5:
+        print("Sorry, the computer won.")
         break
-    elif count_hit_ships()[1] == 5:
-        print("Player win!")
-        break
+
