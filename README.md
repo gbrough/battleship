@@ -1,12 +1,13 @@
 # Distractions/Rewards
--  time space complexity extension 
+- time space complexity extension 
+- conditionals, looping, lists/dictionaries, objects, data structures, algorithms, 
 
 Fixes:
 - 
 
 Requirements:
 - 5 different types of ships
-  - Create from class
+  - Create from class - what are the attributes?
   - Store in a dictionary
 - Ask if horizontal or vertical - ask for 3rd input
 - Check if ship can fit in location
@@ -32,14 +33,17 @@ Game types/videos:
 
 4. Add 5 different ship types
   - Add classes and objects
-  - Base class ship
-  - Derived class for each type of ship
-  - Dictionary of ships and their location
+  - Base(Parent) class ship
+    - constructor
+  - Derived(sub) class for each type of ship
     - Carrier has has five locations
     - Battleship has has four locations
     - Cruiser has has three locations
     - Submarine has has three locations
     - Destroyer has has two locations
+  
+5. Hold their location in a dictionary
+
 
 
  

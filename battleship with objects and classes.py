@@ -1,4 +1,21 @@
 from random import randint
+class ShipObject:
+    def __init__(self, size, orientation):
+        self.size = size
+        self.orientation = orientation
+        self.hit = False
+    def size(self):
+        return self.size
+    def orientation(self):
+        return self.orientation
+    def hit(self):
+        return self.hit
+    def setHit(self):
+        self.hit = True
+    def isHit(self):
+        return self.hit
+    
+
 
 HIDDEN_BOARD = [[" "] * 8 for x in range(8)]
 GUESS_BOARD = [[" "] * 8 for i in range(8)]
@@ -48,6 +65,25 @@ def count_hit_ships(board):
             if column == "X":
                 count += 1
     return count
+
+# check if orientation fits board
+def check_orientation(ship_row, ship_column, orientation, board):
+    if orientation == "horizontal":
+        if ship_row + self.ShipObject.size < 8 and board[ship_row + 1][ship_column] == "X":
+            return True
+        else:
+            return False
+    elif orientation == "vertical":
+        if ship_column + 1 < 8 and board[ship_row][ship_column + 1] == "X":
+            return True
+        else:
+            return False
+
+
+
+
+
+
 
 create_ships(HIDDEN_BOARD)
 turns = 10

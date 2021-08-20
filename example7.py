@@ -115,7 +115,7 @@ class Submarine(Ship):
 class Battleship(Ship):
     _length = 4
     name = "Battleship"
-
+ 
 
 # List of ship types, in the order player shoud place them
 SHIP_TYPES = [AircraftCarrier, Battleship, Submarine, Destroyer]
