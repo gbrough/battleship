@@ -1,11 +1,15 @@
 # Distractions/Rewards
-- create video of basic 1 player game
+-  time space complexity extension 
 
 Fixes:
-- check if computer guess/displays 1st turn, problem with line 
+- 
 
 Requirements:
-- 
+- 5 different types of ships
+  - Create from class
+  - Store in a dictionary
+- Ask if horizontal or vertical - ask for 3rd input
+- Check if ship can fit in location
 
 Teaching:
 
