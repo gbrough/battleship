@@ -23,8 +23,9 @@ Game types/videos:
   - take turns guessing, whichever one hits all five first wins
 3. Improve AI
   - If hit, computer plays adjacent to ship
+  - Place ships in center and not edges, some next to each other
   - Use checkerboard guess strategy
-  - 
+
 4. Add 5 different ship types
   - Add classes and objects
   - Base class ship
