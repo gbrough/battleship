@@ -1,9 +1,9 @@
 from random import randint
 
-PLAYER_BOARD = [[" "] * 8 for i in range(1,9)]
-COMPUTER_BOARD = [[" "] * 8 for i in range(1,9)]
-PLAYER_GUESS_BOARD = [[" "] * 8 for i in range(1,9)]
-COMPUTER_GUESS_BOARD = [[" "] * 8 for i in range(1,9)]
+PLAYER_BOARD = [[" "] * 8 for i in range(8)]
+COMPUTER_BOARD = [[" "] * 8 for i in range(8)]
+PLAYER_GUESS_BOARD = [[" "] * 8 for i in range(8)]
+COMPUTER_GUESS_BOARD = [[" "] * 8 for i in range(8)]
 
 def print_board(board): 
     print("  A B C D E F G H")
@@ -24,16 +24,23 @@ letters_to_numbers = {
     'H': 7
 }
 def get_ship_location():
-    row = input("Enter the row of the ship: ")
-    while row not in "12345678":
-        print('Not an appropriate choice, please select a valid row')
-        row = input("Enter the row of the ship: ")
-    column = input("Enter the column of the ship: ").upper()
-    while column not in "ABCDEFGH":
-        print('Not an appropriate choice, please select a valid column')
-        column = input("Enter the column of the ship: ").upper()
-    return int(row) - 1, letters_to_numbers[column]
-
+    while True:
+        try: 
+            row = input("Enter the row of the ship: ")
+            if row in '12345678':
+                row = int(row) - 1
+                break
+        except ValueError:
+            print('Enter a valid letter between A-H')
+    while True:
+        try: 
+            column = input("Enter the column of the ship: ").upper()
+            if column in 'ABCDEFGH':
+                column = letters_to_numbers[column]
+                break
+        except KeyError:
+            print('Enter a valid letter between A-H')
+    return row, column
 #computer create 5 ships
 def computer_create_ships(board):
     for ship in range(5):
@@ -61,8 +68,7 @@ def count_hit_ships(board):
     return count
 
 computer_create_ships(COMPUTER_BOARD)
-print_board(COMPUTER_BOARD)
-#player_create_ships(PLAYER_BOARD)
+player_create_ships(PLAYER_BOARD)
 while True:
     #player turn
     while True:
@@ -84,15 +90,15 @@ while True:
         break   
     #computer turn
     while True:
-        print_board(COMPUTER_GUESS_BOARD)
-        row, column = randint(1,9), randint(1,9)
-        if COMPUTER_GUESS_BOARD[row][column] == '-':
-            row, column = randint(1,9), randint(1,9)
-        elif PLAYER_BOARD[row][column] == "X":
+        row, column = randint(0,7), randint(0,7)
+        while COMPUTER_GUESS_BOARD[row][column] == "-":
+            row, column = randint(0,7), randint(0,7)
+        if PLAYER_BOARD[row][column] == "X":
             COMPUTER_GUESS_BOARD[row][column] = "X"
             break
         else:
             COMPUTER_GUESS_BOARD[row][column] = '-'
+            print_board(COMPUTER_GUESS_BOARD)
             break
     if count_hit_ships(COMPUTER_GUESS_BOARD) == 5:
         print("Sorry, the computer won.")

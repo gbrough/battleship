@@ -1,9 +1,9 @@
 from random import randint
 
 #Board for holding ship locations
-HIDDEN_BOARD = [[" "] * 8 for x in range(1,9)]
+HIDDEN_BOARD = [[" "] * 8 for x in range(8)]
 # Board for displaying hits and misses
-GUESS_BOARD = [[" "] * 8 for i in range(1,9)]
+GUESS_BOARD = [[" "] * 8 for i in range(8)]
 
 def print_board(board):
     print("  A B C D E F G H")
@@ -23,17 +23,6 @@ letters_to_numbers = {
     'G': 6,
     'H': 7
 }
-def get_ship_location():
-    row = input("Enter the row of the ship: ").upper()
-    while row not in "12345678" or ValueError:
-        print('Not an appropriate choice, please select a valid row')
-        row = input("Enter the row of the ship: ").upper()
-    column = input("Enter the column of the ship: ").upper()
-    while column not in "ABCDEFGH" or ValueError:
-        print('Not an appropriate choice, please select a valid column')
-        column = input("Enter the column of the ship: ").upper()
-    return int(row) - 1, letters_to_numbers[column]
-
 #computer create 5 ships
 def create_ships(board):
     for ship in range(5):
@@ -41,6 +30,19 @@ def create_ships(board):
         while board[ship_row][ship_column] == "X":
             ship_row, ship_column = get_ship_location()
         board[ship_row][ship_column] = "X"
+
+def get_ship_location():
+    row = input("Enter the row of the ship: ").upper()
+    while row not in "12345678":
+        print('Not an appropriate choice, please select a valid row')
+        row = input("Enter the row of the ship: ").upper()
+    column = input("Enter the column of the ship: ").upper()
+    while column not in "ABCDEFGH":
+        print('Not an appropriate choice, please select a valid column')
+        column = input("Enter the column of the ship: ").upper()
+    return int(row) - 1, letters_to_numbers[column]
+
+
 
 #check if all ships are hit
 def count_hit_ships(board):
@@ -61,7 +63,8 @@ while turns > 0:
         print("You guessed that one already.")
     elif HIDDEN_BOARD[row][column] == "X":
         print("Hit")
-        GUESS_BOARD[row][column] = "X"   
+        GUESS_BOARD[row][column] = "X" 
+        turns -= 1  
     else:
         print("MISS!")
         GUESS_BOARD[row][column] = "-"   

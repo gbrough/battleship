@@ -2,7 +2,7 @@
 - create video of basic 1 player game
 
 Fixes:
-- computer play, '-' index out of range
+- check if computer guess/displays 1st turn, problem with line 
 
 Requirements:
 - 
@@ -23,6 +23,8 @@ Game types/videos:
   - take turns guessing, whichever one hits all five first wins
 3. Improve AI
   - If hit, computer plays adjacent to ship
+  - Use checkerboard guess strategy
+  - 
 4. Add 5 different ship types
   - Add classes and objects
   - Base class ship
