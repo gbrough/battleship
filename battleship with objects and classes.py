@@ -14,7 +14,8 @@ class ShipObject:
         self.hit = True
     def isHit(self):
         return self.hit
-    
+
+
 
 
 HIDDEN_BOARD = [[" "] * 8 for x in range(8)]
@@ -33,7 +34,7 @@ letters_to_numbers = {'A':0, 'B':1, 'C':2, 'D':3, 'E':4, 'F':5, 'G':6, 'H':7}
 #computer create 5 ships
 def create_ships(board):
     for ship in range(5):
-        ship_row, ship_column = randint(0,7), randint(0,7)
+        ship_row, ship_column, ship_orientation = randint(0,7), randint(0,7), randint(0,1)
         while board[ship_row][ship_column] == "X":
             ship_row, ship_column = get_ship_location()
         board[ship_row][ship_column] = "X"
@@ -57,6 +58,15 @@ def get_ship_location():
             print('Enter a valid letter between A-H')
     return row, column
 
+def get_ship_orientation():
+    orientation = input("Enter the orientation of the ship (V or H): ").upper()
+    if orientation == "V" or orientation == "H":
+        return orientation
+    else:
+        while orientation != "V" and orientation != "H":
+            orientation = input("Enter the orientation of the ship (V or H): ").upper()             
+
+get_ship_orientation()
 #check if all ships are hit
 def count_hit_ships(board):
     count = 0
@@ -78,11 +88,6 @@ def check_orientation(ship_row, ship_column, orientation, board):
             return True
         else:
             return False
-
-
-
-
-
 
 
 create_ships(HIDDEN_BOARD)

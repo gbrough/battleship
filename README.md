@@ -6,11 +6,8 @@ Fixes:
 - 
 
 Requirements:
-- 5 different types of ships
-  - Create from class - what are the attributes?
-  - Store in a dictionary
-- Ask if horizontal or vertical - ask for 3rd input
-- Check if ship can fit in location
+- 5 different names and sizes
+- Check if ship can fit with that orientation and location
 
 Teaching:
 
