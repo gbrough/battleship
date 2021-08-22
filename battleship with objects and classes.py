@@ -1,23 +1,21 @@
 from random import randint
-class ShipObject:
-    def __init__(self, size, orientation):
-        self.size = size
+class Ship:
+    def __init__(self, type, orientation, position_x, position_y):
+        self.type = type
         self.orientation = orientation
-        self.hit = False
-    def size(self):
-        return self.size
-    def orientation(self):
-        return self.orientation
-    def hit(self):
-        return self.hit
-    def setHit(self):
-        self.hit = True
-    def isHit(self):
-        return self.hit
+        self.position_x = position_x
+        self.position_y = position_y
 
-
-
-
+    def get_ship_type(self, type):
+        type = {
+            'Carrier': 5,
+            'Battleship': 4,
+            'Cruiser': 3,
+            'Submarine': 3,
+            'Destroyer': 2
+        }
+        return type[self.type]
+    
 HIDDEN_BOARD = [[" "] * 8 for x in range(8)]
 GUESS_BOARD = [[" "] * 8 for i in range(8)]
 
@@ -66,7 +64,6 @@ def get_ship_orientation():
         while orientation != "V" and orientation != "H":
             orientation = input("Enter the orientation of the ship (V or H): ").upper()             
 
-get_ship_orientation()
 #check if all ships are hit
 def count_hit_ships(board):
     count = 0
@@ -88,7 +85,6 @@ def check_orientation(ship_row, ship_column, orientation, board):
             return True
         else:
             return False
-
 
 create_ships(HIDDEN_BOARD)
 turns = 10

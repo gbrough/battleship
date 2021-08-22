@@ -6,8 +6,9 @@ Fixes:
 - 
 
 Requirements:
-- 5 different names and sizes
+- Should functions/dictionary go inside of class
 - Check if ship can fit with that orientation and location
+
 
 Teaching:
 

@@ -59,7 +59,6 @@ class Player(object):
         self.name = name
         self.board = []
 
-
 class Board(object):
     def __init__(self, owner):
         self.owner = owner
