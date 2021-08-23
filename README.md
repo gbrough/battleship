@@ -1,13 +1,16 @@
-# Distractions/Rewards
-- time space complexity extension 
-- conditionals, looping, lists/dictionaries, objects, data structures, algorithms, 
+# Distractions/Rewards 
+- conditionals, looping, lists/dictionaries, objects, data structures, algorithms. 
 
 Fixes:
 - 
 
 Requirements:
-- Should functions/dictionary go inside of class
-- Check if ship can fit with that orientation and location
+1 player guesses computer ships
+- Check if ship can fit
+  - does it fit within row or column bounds?
+    - how do you define row and column bounds in a list.
+  - is each veritcal or horizontal position available?
+- Store ship in dictionary or list
 
 
 Teaching:

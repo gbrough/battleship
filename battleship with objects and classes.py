@@ -1,20 +1,7 @@
+import random
 from random import randint
-class Ship:
-    def __init__(self, type, orientation, position_x, position_y):
-        self.type = type
-        self.orientation = orientation
-        self.position_x = position_x
-        self.position_y = position_y
 
-    def get_ship_type(self, type):
-        type = {
-            'Carrier': 5,
-            'Battleship': 4,
-            'Cruiser': 3,
-            'Submarine': 3,
-            'Destroyer': 2
-        }
-        return type[self.type]
+SHIP_TYPES = {'Carrier': 5, 'Battleship': 4, 'Cruiser': 3, 'Submarine': 3, 'Destroyer': 2}
     
 HIDDEN_BOARD = [[" "] * 8 for x in range(8)]
 GUESS_BOARD = [[" "] * 8 for i in range(8)]
@@ -31,8 +18,10 @@ letters_to_numbers = {'A':0, 'B':1, 'C':2, 'D':3, 'E':4, 'F':5, 'G':6, 'H':7}
 
 #computer create 5 ships
 def create_ships(board):
+    orientation = random.choice(["horizontal", "vertical"])
+
     for ship in range(5):
-        ship_row, ship_column, ship_orientation = randint(0,7), randint(0,7), randint(0,1)
+        ship_row, ship_column = randint(0,7), randint(0,7)
         while board[ship_row][ship_column] == "X":
             ship_row, ship_column = get_ship_location()
         board[ship_row][ship_column] = "X"
@@ -54,15 +43,7 @@ def get_ship_location():
                 break
         except KeyError:
             print('Enter a valid letter between A-H')
-    return row, column
-
-def get_ship_orientation():
-    orientation = input("Enter the orientation of the ship (V or H): ").upper()
-    if orientation == "V" or orientation == "H":
-        return orientation
-    else:
-        while orientation != "V" and orientation != "H":
-            orientation = input("Enter the orientation of the ship (V or H): ").upper()             
+    return row, column          
 
 #check if all ships are hit
 def count_hit_ships(board):

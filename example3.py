@@ -1,5 +1,4 @@
 import random
-
 class Game():
     registry = []
     moves = []
