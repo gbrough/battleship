@@ -6,8 +6,7 @@ Fixes:
 
 Requirements:
 1 player guesses against computer placement
-- Loop through all ship types
-- Test all 5 ships are on board
+- place all 5 ships
 
 
 Legend:

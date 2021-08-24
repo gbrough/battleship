@@ -1,9 +1,7 @@
 import random
 from random import randint
 
-LENGTH_OF_SHIPS = [2, 3, 3, 4, 5]
-COL_SIZE = 8
-ROW_SIZE = 8    
+LENGTH_OF_SHIPS = [5,5,5,5,5]  
 HIDDEN_BOARD = [[" "] * 8 for x in range(8)]
 GUESS_BOARD = [[" "] * 8 for i in range(8)]
 
@@ -30,31 +28,38 @@ def check_ship_fit(SHIP_LENGTH, row, column, orientation):
         else:
             return True
 
-#check if positions are occupied
-def check_position(board, row, column):
-    for row_index in range(len(board)):
-        for column_index in range(len(board[row_index])):
-            if row_index == row and column_index == column:
-                if board[row_index][column_index] == "X":
-                    return False
-                else:
-                    return True
+#check each position for overlap
+def check_overlap(board, row, column, orientation):
+    if orientation == "horizontal":
+        for i in range(column, column + LENGTH_OF_SHIPS[0]):
+            if board[row][i] == "X":
+                return True
+    else:
+        for i in range(row, row + LENGTH_OF_SHIPS[0]):
+            if board[i][column] == "X":
+                return True
+    return False
 
 #place Ships
 def place_ships(board):
-    for ship in LENGTH_OF_SHIPS:
-        orientation = random.choice(["horizontal", "vertical"])
-        row = randint(0, 7)
-        column = randint(0, 7)
-        while not check_ship_fit(board, ship, row, column, orientation):
-
-        while check_position(board, row, column):
-            if orientation == "horizontal":
-                for i in range(len(LENGTH_OF_SHIPS)):
-                    board[row][column + i] = "X"
-            else:
-                for i in range(len(LENGTH_OF_SHIPS)):
-                    board[row + i][column] = "X"
+    #loop through length of ships
+    for ship_length in LENGTH_OF_SHIPS:
+        #loop until ship fits
+        while True:
+            row, column = random.randint(0, 7), random.randint(0, 7)
+            orientation = random.choice(["horizontal", "vertical"])
+            if check_ship_fit(ship_length, row, column, orientation):
+                #loop until ship doesn't overlap
+                while not check_overlap(board, row, column, orientation):
+                    #place ship
+                    if orientation == "horizontal":
+                        for i in range(column, column + ship_length):
+                            board[row][i] = "X"
+                    else:
+                        for i in range(row, row + ship_length):
+                            board[i][column] = "X"
+                    break
+                break
         
 def get_ship_location():
     while True:
