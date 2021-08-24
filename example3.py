@@ -51,7 +51,6 @@ class Game():
         Helper().tile_check(player, x, y)
         exit()
         
-
 class Player(object):
     def __init__(self, name):
         Game.registry.append(self)
@@ -67,15 +66,13 @@ class Board(object):
         self.WIDTH = 11
         self.HEIGHT = 11
         
-
 class Ship(object):
     def __init__(self, length, name):
         self.length = length
         self.name = name
         self.sunk = False
         self.loc = []
-        
-        
+                
 class Tile(object):
     def __init__(self, number, row, column):
         self.number = number
@@ -85,7 +82,6 @@ class Tile(object):
         self.has_ship = False
         self.bombed = False
         self.current_ship = "nothing but the deep blue sea here"
-
 
 class Helper(object):
     def set_ships(self, ship, grid):

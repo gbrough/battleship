@@ -1,8 +1,9 @@
 import random
 from random import randint
 
-SHIP_TYPES = {'Carrier': 5, 'Battleship': 4, 'Cruiser': 3, 'Submarine': 3, 'Destroyer': 2}
-    
+LENGTH_OF_SHIPS = [2, 3, 3, 4, 5]
+COL_SIZE = 8
+ROW_SIZE = 8    
 HIDDEN_BOARD = [[" "] * 8 for x in range(8)]
 GUESS_BOARD = [[" "] * 8 for i in range(8)]
 
@@ -16,16 +17,45 @@ def print_board(board):
 
 letters_to_numbers = {'A':0, 'B':1, 'C':2, 'D':3, 'E':4, 'F':5, 'G':6, 'H':7}
 
-#computer create 5 ships
-def create_ships(board):
-    orientation = random.choice(["horizontal", "vertical"])
+#check if ship fits in board
+def check_ship_fit(SHIP_LENGTH, row, column, orientation):
+    if orientation == "horizontal":
+        if column + SHIP_LENGTH > 8:
+            return False
+        else:
+            return True
+    else:
+        if row + SHIP_LENGTH > 8:
+            return False
+        else:
+            return True
 
-    for ship in range(5):
-        ship_row, ship_column = randint(0,7), randint(0,7)
-        while board[ship_row][ship_column] == "X":
-            ship_row, ship_column = get_ship_location()
-        board[ship_row][ship_column] = "X"
+#check if positions are occupied
+def check_position(board, row, column):
+    for row_index in range(len(board)):
+        for column_index in range(len(board[row_index])):
+            if row_index == row and column_index == column:
+                if board[row_index][column_index] == "X":
+                    return False
+                else:
+                    return True
 
+#place Ships
+def place_ships(board):
+    for ship in LENGTH_OF_SHIPS:
+        orientation = random.choice(["horizontal", "vertical"])
+        row = randint(0, 7)
+        column = randint(0, 7)
+        while not check_ship_fit(board, ship, row, column, orientation):
+
+        while check_position(board, row, column):
+            if orientation == "horizontal":
+                for i in range(len(LENGTH_OF_SHIPS)):
+                    board[row][column + i] = "X"
+            else:
+                for i in range(len(LENGTH_OF_SHIPS)):
+                    board[row + i][column] = "X"
+        
 def get_ship_location():
     while True:
         try: 
@@ -54,24 +84,12 @@ def count_hit_ships(board):
                 count += 1
     return count
 
-# check if orientation fits board
-def check_orientation(ship_row, ship_column, orientation, board):
-    if orientation == "horizontal":
-        if ship_row + self.ShipObject.size < 8 and board[ship_row + 1][ship_column] == "X":
-            return True
-        else:
-            return False
-    elif orientation == "vertical":
-        if ship_column + 1 < 8 and board[ship_row][ship_column + 1] == "X":
-            return True
-        else:
-            return False
-
-create_ships(HIDDEN_BOARD)
+place_ships(HIDDEN_BOARD)
+print_board(HIDDEN_BOARD)
 turns = 10
 while turns > 0:
     print('Guess a battleship location')
-    print_board(GUESS_BOARD)
+    #print_board(GUESS_BOARD)
     row, column = get_ship_location()
     if GUESS_BOARD[row][column] == "-":
         print("You guessed that one already.")

@@ -1,19 +1,14 @@
 # Distractions/Rewards 
-- conditionals, looping, lists/dictionaries, objects, data structures, algorithms. 
+- sticky keyboard
 
 Fixes:
 - 
 
 Requirements:
-1 player guesses computer ships
-- Check if ship can fit
-  - does it fit within row or column bounds?
-    - how do you define row and column bounds in a list.
-  - is each veritcal or horizontal position available?
-- Store ship in dictionary or list
+1 player guesses against computer placement
+- Loop through all ship types
+- Test all 5 ships are on board
 
-
-Teaching:
 
 Legend:
 " " available to guess
@@ -42,8 +37,7 @@ Game types/videos:
     - Cruiser has has three locations
     - Submarine has has three locations
     - Destroyer has has two locations
-  
-5. Hold their location in a dictionary
+
 
 
 
