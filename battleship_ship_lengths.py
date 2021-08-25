@@ -29,13 +29,13 @@ def check_ship_fit(SHIP_LENGTH, row, column, orientation):
             return True
 
 #check each position for overlap
-def ship_overlaps(board, row, column, orientation):
+def ship_overlaps(board, row, column, orientation, ship_length):
     if orientation == "H":
-        for i in range(8):
+        for i in range(column, column + ship_length):
             if board[row][i] == "X":
                 return True
     else:
-        for i in range(8):
+        for i in range(row, row + ship_length):
             if board[i][column] == "X":
                 return True
     return False
@@ -44,14 +44,14 @@ def ship_overlaps(board, row, column, orientation):
 def place_ships(board):
     #loop through length of ships
     for ship_length in LENGTH_OF_SHIPS:
-        #loop until ship fits
+        #loop until ship fits and doesn't overlap
         while True:
             orientation = random.choice(["H", "V"])
             row = randint(0, 7)
             column = randint(0, 7)
             if check_ship_fit(ship_length, row, column, orientation):
                 #check if ship overlaps
-                    if ship_overlaps(board, row, column, orientation) == False:
+                    if ship_overlaps(board, row, column, orientation, ship_length) == False:
                         #place ship
                         if orientation == "H":
                             for i in range(column, column + ship_length):

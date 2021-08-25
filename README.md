@@ -1,10 +1,7 @@
 # Distractions/Rewards 
-- sticky keyboard
 
 Fixes:
-- overlap not check after 1 iteration
-
-
+- 
 
 Requirements:
 
@@ -24,6 +21,7 @@ Game types/videos:
   - take turns guessing, whichever one hits all five first wins
 3. Add 5 different ship types
   - Can objects or dictionaries be used?
+  - change from 1 player game to advanced 1 player game
 4. Improve AI
   - If hit, computer plays adjacent to ship
   - Place ships in center and not edges, some next to each other
