@@ -6,7 +6,6 @@ Fixes:
 Requirements:
 
 
-
 Legend:
 " " available to guess
  X is hit on guess board
@@ -17,15 +16,17 @@ Game types/videos:
   - Computer randomly places 5 ships, player has 10 guesses
 2. Advanced 1 player game.
   - player and computer places ships, both guess
-  - player places 5 ships, computer places 5 ships
   - take turns guessing, whichever one hits all five first wins
-3. Add 5 different ship types
+3. Basic Game -  5 different ship types
+  - computer randomly places 5 ships with different sizes, player has 10 guesses, thats 17 out of 64
+4. Advanced 1 Player Game - 5 different ship types
+  - player and computer place 5 ships, both guess
+  - take turns guessing, whichever one hits all five first wins
   - Can objects or dictionaries be used?
-  - change from 1 player game to advanced 1 player game
-4. Improve AI
-  - If hit, computer plays adjacent to ship
-  - Place ships in center and not edges, some next to each other
-  - Use checkerboard guess strategy
+5. Improve AI
+  - Computer Placement - Place ships in center and not edges, cluster in bottom right corner
+  - Computer Guess - If hit, computer plays adjacent to ship
+  - Computer Guess - Use checkerboard guess strategy
 
 
 
