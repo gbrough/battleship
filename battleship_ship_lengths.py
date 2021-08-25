@@ -17,7 +17,7 @@ letters_to_numbers = {'A':0, 'B':1, 'C':2, 'D':3, 'E':4, 'F':5, 'G':6, 'H':7}
 
 #check if ship fits in board
 def check_ship_fit(SHIP_LENGTH, row, column, orientation):
-    if orientation == "horizontal":
+    if orientation == "H":
         if column + SHIP_LENGTH > 8:
             return False
         else:
@@ -30,7 +30,7 @@ def check_ship_fit(SHIP_LENGTH, row, column, orientation):
 
 #check each position for overlap
 def ship_overlaps(board, row, column, orientation):
-    if orientation == "horizontal":
+    if orientation == "H":
         for i in range(column, column + LENGTH_OF_SHIPS[0]):
             if board[row][i] == "X":
                 return True
@@ -46,13 +46,13 @@ def place_ships(board):
     for ship_length in LENGTH_OF_SHIPS:
         #loop until ship fits
         while True:
-            row, column = random.randint(0,7), random.randint(0,7)
-            orientation = random.choice(["horizontal", "vertical"])
+            row, column = 0, random.randint(0,7)
+            orientation = random.choice(["H", "V"])
             if check_ship_fit(ship_length, row, column, orientation):
                 #check if ship overlaps
                     if ship_overlaps(board, row, column, orientation) == False:
                         #place ship
-                        if orientation == "horizontal":
+                        if orientation == "H":
                             for i in range(column, column + ship_length):
                                 board[row][i] = "X"
                         else:

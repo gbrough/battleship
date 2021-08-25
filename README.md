@@ -2,8 +2,8 @@
 - sticky keyboard
 
 Fixes:
-- overlaps vertically
-- does it overlap horizontally? - manually create coordinates
+- overlaps not working
+- column and orientation not passing. logic passing to else
 
 Requirements:
 
