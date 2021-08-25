@@ -8,7 +8,7 @@ GUESS_BOARD = [[" "] * 8 for i in range(8)]
 def print_board(board):
     print("  A B C D E F G H")
     print("  +-+-+-+-+-+-+-+")
-    row_number = 1
+    row_number = 0
     for row in board:
         print("%d|%s|" % (row_number, "|".join(row)))
         row_number += 1
@@ -31,11 +31,11 @@ def check_ship_fit(SHIP_LENGTH, row, column, orientation):
 #check each position for overlap
 def ship_overlaps(board, row, column, orientation):
     if orientation == "H":
-        for i in range(column, column + LENGTH_OF_SHIPS[0]):
+        for i in range(8):
             if board[row][i] == "X":
                 return True
     else:
-        for i in range(row, row + LENGTH_OF_SHIPS[0]):
+        for i in range(8):
             if board[i][column] == "X":
                 return True
     return False
@@ -46,8 +46,9 @@ def place_ships(board):
     for ship_length in LENGTH_OF_SHIPS:
         #loop until ship fits
         while True:
-            row, column = 0, random.randint(0,7)
             orientation = random.choice(["H", "V"])
+            row = randint(0, 7)
+            column = randint(0, 7)
             if check_ship_fit(ship_length, row, column, orientation):
                 #check if ship overlaps
                     if ship_overlaps(board, row, column, orientation) == False:
@@ -90,10 +91,13 @@ def count_hit_ships(board):
 
 place_ships(HIDDEN_BOARD)
 print_board(HIDDEN_BOARD)
+#count x's in hidden board
+print("Number of ships: ", count_hit_ships(HIDDEN_BOARD))
+        
 turns = 100
 while turns > 0:
     print('Guess a battleship location')
-    print_board(GUESS_BOARD)
+    # print_board(GUESS_BOARD)
     row, column = get_ship_location()
     if GUESS_BOARD[row][column] == "-":
         print("You guessed that one already.")

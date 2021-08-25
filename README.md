@@ -2,8 +2,9 @@
 - sticky keyboard
 
 Fixes:
-- overlaps not working
-- column and orientation not passing. logic passing to else
+- overlap not check after 1 iteration
+
+
 
 Requirements:
 
