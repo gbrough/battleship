@@ -2,7 +2,7 @@
 - 2-3 part video 
 
 Fixes:
-- refactor place ships function
+- computer recursion crashed after ~32 misses
 
 Requirements:
 - player place 5 ships - use functions to check for fit and overlap

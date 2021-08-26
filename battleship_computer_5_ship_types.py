@@ -62,7 +62,8 @@ def place_ships(board):
                                 board[i][column] = "X"
                         break
             else:
-                place_ship = 0
+                place_ship = True
+                print('Place the ship with a length of ' + str(ship_length))
                 row, column, orientation = user_input(place_ship)
                 if check_ship_fit(ship_length, row, column, orientation):
                     #check if ship overlaps
@@ -78,7 +79,7 @@ def place_ships(board):
                             break 
 
 def user_input(place_ship):
-    if place_ship == 0:
+    if place_ship == True:
         while True:
             try: 
                 orientation = input("Enter orientation (H or V): ").upper()
@@ -131,6 +132,36 @@ def count_hit_ships(board):
                 count += 1
     return count
 
+def turn(board):
+    if board == PLAYER_GUESS_BOARD:
+        row, column = user_input(PLAYER_GUESS_BOARD)
+        #check if already guessed a miss
+        if board[row][column] == "-":
+            turn(board)
+        #check if already guessed a hit
+        elif board[row][column] == "X":
+            turn(board)
+        #if hit, place on board
+        elif COMPUTER_BOARD[row][column] == "X":
+            board[row][column] = "X"
+        #place a miss
+        else:
+            board[row][column] = "-"
+    else:
+        row, column = random.randint(0,7), random.randint(0,7)
+        #check if already guessed a miss
+        if board[row][column] == "-":
+            turn(board)
+        #check if already guessed a hit
+        elif board[row][column] == "X":
+            turn(board)
+        #if hit, place on board
+        elif PLAYER_BOARD[row][column] == "X":
+            board[row][column] = "X"
+        #place a miss
+        else:
+            board[row][column] = "-"
+
 place_ships(COMPUTER_BOARD)
 print_board(COMPUTER_BOARD)
 print_board(PLAYER_BOARD)
@@ -141,34 +172,15 @@ while True:
     while True:
         print('Guess a battleship location')
         print_board(PLAYER_GUESS_BOARD)
-        row, column = user_input(PLACE, GUESS)
-        if PLAYER_GUESS_BOARD[row][column] == "-":
-            print("You guessed that one already.")
-        elif COMPUTER_BOARD[row][column] == "X":
-            print("Hit")
-            PLAYER_GUESS_BOARD[row][column] = "X"  
-            break 
-        else:
-            print("MISS!")
-            PLAYER_GUESS_BOARD[row][column] = "-" 
-            break  
+        turn(PLAYER_GUESS_BOARD)
+        break
     if count_hit_ships(PLAYER_GUESS_BOARD) == 17:
         print("You win!")
         break   
     #computer turn
     while True:
-        row, column = randint(0,7), randint(0,7)
-        while COMPUTER_GUESS_BOARD[row][column] == "-":
-            row, column = randint(0,7), randint(0,7)
-        while COMPUTER_GUESS_BOARD[row][column] == "X":
-            row, column = randint(0,7), randint(0,7)
-        if PLAYER_BOARD[row][column] == "X":
-            COMPUTER_GUESS_BOARD[row][column] = "X"
-            break
-        else:
-            COMPUTER_GUESS_BOARD[row][column] = '-'
-            break
-                
+        turn(COMPUTER_GUESS_BOARD)
+        break           
     print_board(COMPUTER_GUESS_BOARD)   
     if count_hit_ships(COMPUTER_GUESS_BOARD) == 17:
         print("Sorry, the computer won.")
