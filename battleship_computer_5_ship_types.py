@@ -70,22 +70,20 @@ def place_user_ships(board):
         print('Place the ship with a length of ' + str(ship_length))
         #loop until ship fits and doesn't overlap
         while True:
-            row = input("Enter the row 1-8 of the ship: ")
-            column = input('Enter column of ship: ').upper()
-            orientation = input("Enter orientation (H or V): ").upper()
-            if check_ship_fit(ship_length, int(row), letters_to_numbers[column], orientation):
+            row, column, orientation = user_ship_input()
+            if check_ship_fit(ship_length, row, column, orientation):
                 #check if ship overlaps
-                    if ship_overlaps(board, int(row), letters_to_numbers[column], orientation, ship_length) == False:
+                    if ship_overlaps(board, row, column, orientation, ship_length) == False:
                         #place ship
                         if orientation == "H":
-                            for i in range(letters_to_numbers[column], letters_to_numbers[column] + ship_length):
-                                board[int(row)][i] = "X"
+                            for i in range(column, column + ship_length):
+                                board[row][i] = "X"
                         else:
-                            for i in range(int(row), int(row) + ship_length):
-                                board[i][letters_to_numbers[column]] = "X"
+                            for i in range(row, row + ship_length):
+                                board[i][column] = "X"
                         break    
 
-def user_ship_input(row, column, orientation):
+def user_ship_input():
     while True:
         try: 
             orientation = input("Enter orientation (H or V): ").upper()
@@ -168,13 +166,16 @@ while True:
         row, column = randint(0,7), randint(0,7)
         while COMPUTER_GUESS_BOARD[row][column] == "-":
             row, column = randint(0,7), randint(0,7)
+        while COMPUTER_GUESS_BOARD[row][column] == "X":
+            row, column = randint(0,7), randint(0,7)
         if PLAYER_BOARD[row][column] == "X":
             COMPUTER_GUESS_BOARD[row][column] = "X"
             break
         else:
             COMPUTER_GUESS_BOARD[row][column] = '-'
-            print_board(COMPUTER_GUESS_BOARD)
             break
+                
+    print_board(COMPUTER_GUESS_BOARD)   
     if count_hit_ships(COMPUTER_GUESS_BOARD) == 17:
         print("Sorry, the computer won.")
         break

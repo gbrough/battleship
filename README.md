@@ -2,9 +2,8 @@
 - 2-3 part video 
 
 Fixes:
-- 1ah places in 2ah instead - needs to be row -1
-- computer has missed a couple turns
-
+- refactor computer/user place ship functions
+- refactor user place/guess input functions
 
 Requirements:
 - player place 5 ships - use functions to check for fit and overlap
