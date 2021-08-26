@@ -1,5 +1,4 @@
 import random
-from random import randint
 
 LENGTH_OF_SHIPS = [2,3,3,4,5]  
 PLAYER_BOARD = [[" "] * 8 for i in range(8)]
