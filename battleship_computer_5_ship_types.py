@@ -43,12 +43,12 @@ def ship_overlaps(board, row, column, orientation, ship_length):
     return False
 
 #place Ships
-def place_ships(board, player):
+def place_ships(board):
     #loop through length of ships
     for ship_length in LENGTH_OF_SHIPS:
         #loop until ship fits and doesn't overlap
         while True:
-            if player == 0:
+            if board == COMPUTER_BOARD:
                 orientation, row, column = random.choice(["H", "V"]), random.randint(0,7), random.randint(0,7)
                 if check_ship_fit(ship_length, row, column, orientation):
                     #check if ship overlaps
@@ -62,7 +62,8 @@ def place_ships(board, player):
                                 board[i][column] = "X"
                         break
             else:
-                row, column, orientation = user_ship_input()
+                place_ship = 0
+                row, column, orientation = user_input(place_ship)
                 if check_ship_fit(ship_length, row, column, orientation):
                     #check if ship overlaps
                         if ship_overlaps(board, row, column, orientation, ship_length) == False:
@@ -76,50 +77,50 @@ def place_ships(board, player):
                             print_board(PLAYER_BOARD)
                             break 
 
-def user_ship_input():
-    while True:
-        try: 
-            orientation = input("Enter orientation (H or V): ").upper()
-            if orientation == "H" or orientation == "V":
-                break
-        except TypeError:
-            print('Enter a valid orientation H or V')
-    while True:
-        try: 
-            row = input("Enter the row 1-8 of the ship: ")
-            if row in '12345678':
-                row = int(row) - 1
-                break
-        except ValueError:
-            print('Enter a valid letter between 1-8')
-    while True:
-        try: 
-            column = input("Enter the column of the ship: ").upper()
-            if column in 'ABCDEFGH':
-                column = letters_to_numbers[column]
-                break
-        except KeyError:
-            print('Enter a valid letter between A-H')
-    return row, column, orientation 
-
-def user_input_guess():
-    while True:
-        try: 
-            row = input("Enter the row 1-8 of the ship: ")
-            if row in '12345678':
-                row = int(row) - 1
-                break
-        except ValueError:
-            print('Enter a valid letter between 1-8')
-    while True:
-        try: 
-            column = input("Enter the column of the ship: ").upper()
-            if column in 'ABCDEFGH':
-                column = letters_to_numbers[column]
-                break
-        except KeyError:
-            print('Enter a valid letter between A-H')
-    return row, column        
+def user_input(place_ship):
+    if place_ship == 0:
+        while True:
+            try: 
+                orientation = input("Enter orientation (H or V): ").upper()
+                if orientation == "H" or orientation == "V":
+                    break
+            except TypeError:
+                print('Enter a valid orientation H or V')
+        while True:
+            try: 
+                row = input("Enter the row 1-8 of the ship: ")
+                if row in '12345678':
+                    row = int(row) - 1
+                    break
+            except ValueError:
+                print('Enter a valid letter between 1-8')
+        while True:
+            try: 
+                column = input("Enter the column of the ship: ").upper()
+                if column in 'ABCDEFGH':
+                    column = letters_to_numbers[column]
+                    break
+            except KeyError:
+                print('Enter a valid letter between A-H')
+        return row, column, orientation 
+    else:
+        while True:
+            try: 
+                row = input("Enter the row 1-8 of the ship: ")
+                if row in '12345678':
+                    row = int(row) - 1
+                    break
+            except ValueError:
+                print('Enter a valid letter between 1-8')
+        while True:
+            try: 
+                column = input("Enter the column of the ship: ").upper()
+                if column in 'ABCDEFGH':
+                    column = letters_to_numbers[column]
+                    break
+            except KeyError:
+                print('Enter a valid letter between A-H')
+        return row, column        
 
 #check if all ships are hit
 def count_hit_ships(board):
@@ -130,17 +131,17 @@ def count_hit_ships(board):
                 count += 1
     return count
 
-computer, user = 0, 1
-place_ships(COMPUTER_BOARD, computer)
+place_ships(COMPUTER_BOARD)
+print_board(COMPUTER_BOARD)
 print_board(PLAYER_BOARD)
-place_ships(PLAYER_BOARD, user)
+place_ships(PLAYER_BOARD)
         
 while True:
     #player turn
     while True:
         print('Guess a battleship location')
         print_board(PLAYER_GUESS_BOARD)
-        row, column = user_ship_input()
+        row, column = user_input(PLACE, GUESS)
         if PLAYER_GUESS_BOARD[row][column] == "-":
             print("You guessed that one already.")
         elif COMPUTER_BOARD[row][column] == "X":
