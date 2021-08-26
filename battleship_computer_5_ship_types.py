@@ -66,7 +66,6 @@ def place_computer_ships(board):
 def place_user_ships(board):
     #loop through length of ships
     for ship_length in LENGTH_OF_SHIPS:
-        print_board(PLAYER_BOARD)
         print('Place the ship with a length of ' + str(ship_length))
         #loop until ship fits and doesn't overlap
         while True:
@@ -81,6 +80,7 @@ def place_user_ships(board):
                         else:
                             for i in range(row, row + ship_length):
                                 board[i][column] = "X"
+                        print_board(PLAYER_BOARD)
                         break    
 
 def user_ship_input():
@@ -138,9 +138,8 @@ def count_hit_ships(board):
     return count
 
 place_computer_ships(COMPUTER_BOARD)
+print_board(PLAYER_BOARD)
 place_user_ships(PLAYER_BOARD)
-print(COMPUTER_BOARD)
-print(PLAYER_BOARD)
         
 while True:
     #player turn
