@@ -1,10 +1,14 @@
 # Distractions/Rewards 
+- 2-3 part video 
 
 Fixes:
-- 
+- 1ah places in 2ah instead - needs to be row -1
+- computer has missed a couple turns
+
 
 Requirements:
-
+- player place 5 ships - use functions to check for fit and overlap
+- update run to use new functions
 
 Legend:
 " " available to guess
@@ -21,7 +25,7 @@ Game types/videos:
   - computer randomly places 5 ships with different sizes, player has 10 guesses, thats 17 out of 64
 4. Advanced 1 Player Game - 5 different ship types
   - player and computer place 5 ships, both guess
-  - take turns guessing, whichever one hits all five first wins
+  - take turns guessing, whichever one sinks all five first wins
   - Can objects or dictionaries be used?
 5. Improve AI
   - Computer Placement - Place ships in center and not edges, cluster in bottom right corner
