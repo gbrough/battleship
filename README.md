@@ -2,7 +2,6 @@
 - 2-3 part video 
 
 Fixes:
-- refactor computer/user place ship functions
 - refactor user place/guess input functions
 
 Requirements:
