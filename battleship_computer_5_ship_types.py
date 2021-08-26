@@ -131,33 +131,26 @@ def count_hit_ships(board):
                 count += 1
     return count
 
+#user and computer turn
 def turn(board):
     if board == PLAYER_GUESS_BOARD:
         row, column = user_input(PLAYER_GUESS_BOARD)
-        #check if already guessed a miss
         if board[row][column] == "-":
             turn(board)
-        #check if already guessed a hit
         elif board[row][column] == "X":
             turn(board)
-        #if hit, place on board
         elif COMPUTER_BOARD[row][column] == "X":
             board[row][column] = "X"
-        #place a miss
         else:
             board[row][column] = "-"
     else:
         row, column = random.randint(0,7), random.randint(0,7)
-        #check if already guessed a miss
         if board[row][column] == "-":
             turn(board)
-        #check if already guessed a hit
         elif board[row][column] == "X":
             turn(board)
-        #if hit, place on board
         elif PLAYER_BOARD[row][column] == "X":
             board[row][column] = "X"
-        #place a miss
         else:
             board[row][column] = "-"
 
