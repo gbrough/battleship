@@ -1,6 +1,7 @@
-Video 1 - demo, place ship, check_if_fit
-Video 2 - check if overlap, user_input
-Video 3 - check if hit, turns, demo
+Fixes:
+
+Requirements:
+- Create objects - Ships, Players, Board, 
 
 Legend:
 " " available to guess
