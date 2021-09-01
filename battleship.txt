@@ -1,0 +1,107 @@
+Battleship Test
+===============
+
+Let's make a player::
+
+    >>> from battleship import Player
+    >>> jane = Player('Jane')
+
+Let's add some ships for her::
+
+    >>> from battleship import Destroyer, AircraftCarrier, Submarine, Battleship
+    >>> jane.place_ship(Destroyer(), 0, 0, "H")
+    >>> jane.place_ship(AircraftCarrier(), 1, 1, "H")
+    >>> jane.place_ship(Submarine(), 6, 6, "V")
+    >>> jane.place_ship(Battleship(), 3, 3, "V")
+
+Let's look at the board with the ships on it::
+
+    >>> jane.show_board(show_hidden=True, tight=True)
+      0 1 2 3 4 5 6 7 8 9
+    0 D D . . . . . . . .
+    1 . A A A A A . . . .
+    2 . . . . . . . . . .
+    3 . . . B . . . . . .
+    4 . . . B . . . . . .
+    5 . . . B . . . . . .
+    6 . . . B . . S . . .
+    7 . . . . . . S . . .
+    8 . . . . . . S . . .
+    9 . . . . . . . . . .
+
+
+Her opponent shoots at her a few times and misses::
+
+    >>> jane.handle_shot(8, 8)
+    Miss
+
+    >>> jane.handle_shot(7, 7)
+    Miss
+
+Here's how her opponent would see the board::
+
+    >>> jane.show_board(tight=True)
+      0 1 2 3 4 5 6 7 8 9
+    0 . . . . . . . . . .
+    1 . . . . . . . . . .
+    2 . . . . . . . . . .
+    3 . . . . . . . . . .
+    4 . . . . . . . . . .
+    5 . . . . . . . . . .
+    6 . . . . . . . . . .
+    7 . . . . . . . _ . .
+    8 . . . . . . . . _ .
+    9 . . . . . . . . . .
+
+Oh no!::
+
+    >>> jane.handle_shot(0, 0)
+    Hit!
+
+    >>> jane.show_board(tight=True)
+      0 1 2 3 4 5 6 7 8 9
+    0 * . . . . . . . . .
+    1 . . . . . . . . . .
+    2 . . . . . . . . . .
+    3 . . . . . . . . . .
+    4 . . . . . . . . . .
+    5 . . . . . . . . . .
+    6 . . . . . . . . . .
+    7 . . . . . . . _ . .
+    8 . . . . . . . . _ .
+    9 . . . . . . . . . .
+
+    >>> jane.handle_shot(1, 0)
+    Hit!
+    You sunk my Destroyer
+
+    >>> jane.show_board(tight=True)
+      0 1 2 3 4 5 6 7 8 9
+    0 # # . . . . . . . .
+    1 . . . . . . . . . .
+    2 . . . . . . . . . .
+    3 . . . . . . . . . .
+    4 . . . . . . . . . .
+    5 . . . . . . . . . .
+    6 . . . . . . . . . .
+    7 . . . . . . . _ . .
+    8 . . . . . . . . _ .
+    9 . . . . . . . . . .
+
+
+And, of course, it should tell her opponent when they repeat actions:
+
+    >>> jane.handle_shot(0, 0)
+    Traceback (most recent call last):
+    ...
+    ValueError: You've already played there
+
+    >>> jane.handle_shot(8, 8)
+    Traceback (most recent call last):
+    ...
+    ValueError: You've already played there
+
+Since Jane has some ships left, she hasn't lost::
+
+    >>> jane.is_dead()
+    False

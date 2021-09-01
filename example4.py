@@ -115,9 +115,9 @@ class Submarine(Ship):
 class Battleship(Ship):
     _length = 4
     name = "Battleship"
- 
 
-# List of ship types, in the order player should place them
+
+# List of ship types, in the order player shoud place them
 SHIP_TYPES = [AircraftCarrier, Battleship, Submarine, Destroyer]
 
 
@@ -240,7 +240,7 @@ class Player(object):
                 # Keep looping until a legal placement is made
 
                 try:
-                    place = raw_input(
+                    place = input(
                         "\nPlace your %s (col row H/V, eg '00H') >" % ship.name)
                     col = int(place[0])
                     row = int(place[1])
@@ -502,7 +502,7 @@ class Game(object):
             print("%s: Place your ships (%s, turn away!)" % (
                 self.player.name, self.player.opponent.name))
             self.player.place_ships()
-            raw_input("\nPress ENTER to switch players >")
+            input("\nPress ENTER to switch players >")
             print("\n" * 80)  # scroll private stuff off screen
             self.player = self.player.opponent
 
@@ -530,7 +530,7 @@ class Game(object):
                 # Loop until a valid move is made
 
                 try:
-                    move = raw_input("\nMove (col row, e.g. '00') >")
+                    move = input("\nMove (col row, e.g. '00') >")
                     col = int(move[0])
                     row = int(move[1])
                     print()
@@ -612,151 +612,3 @@ if __name__ == '__main__':
 
         if len(sys.argv) == 3:
             play(sys.argv[1], sys.argv[2])
-Read and understand the tests, including the docfile test in battleship.txt.
-
-Battleship Test
-===============
-
-Let's make a player::
-
-    >>> from battleship import Player
-    >>> jane = Player('Jane')
-
-Let's add some ships for her::
-
-    >>> from battleship import Destroyer, AircraftCarrier, Submarine, Battleship
-    >>> jane.place_ship(Destroyer(), 0, 0, "H")
-    >>> jane.place_ship(AircraftCarrier(), 1, 1, "H")
-    >>> jane.place_ship(Submarine(), 6, 6, "V")
-    >>> jane.place_ship(Battleship(), 3, 3, "V")
-
-Let's look at the board with the ships on it::
-
-    >>> jane.show_board(show_hidden=True, tight=True)
-      0 1 2 3 4 5 6 7 8 9
-    0 D D . . . . . . . .
-    1 . A A A A A . . . .
-    2 . . . . . . . . . .
-    3 . . . B . . . . . .
-    4 . . . B . . . . . .
-    5 . . . B . . . . . .
-    6 . . . B . . S . . .
-    7 . . . . . . S . . .
-    8 . . . . . . S . . .
-    9 . . . . . . . . . .
-
-
-Her opponent shoots at her a few times and misses::
-
-    >>> jane.handle_shot(8, 8)
-    Miss
-
-    >>> jane.handle_shot(7, 7)
-    Miss
-
-Here's how her opponent would see the board::
-
-    >>> jane.show_board(tight=True)
-      0 1 2 3 4 5 6 7 8 9
-    0 . . . . . . . . . .
-    1 . . . . . . . . . .
-    2 . . . . . . . . . .
-    3 . . . . . . . . . .
-    4 . . . . . . . . . .
-    5 . . . . . . . . . .
-    6 . . . . . . . . . .
-    7 . . . . . . . _ . .
-    8 . . . . . . . . _ .
-    9 . . . . . . . . . .
-
-Oh no!::
-
-    >>> jane.handle_shot(0, 0)
-    Hit!
-
-    >>> jane.show_board(tight=True)
-      0 1 2 3 4 5 6 7 8 9
-    0 * . . . . . . . . .
-    1 . . . . . . . . . .
-    2 . . . . . . . . . .
-    3 . . . . . . . . . .
-    4 . . . . . . . . . .
-    5 . . . . . . . . . .
-    6 . . . . . . . . . .
-    7 . . . . . . . _ . .
-    8 . . . . . . . . _ .
-    9 . . . . . . . . . .
-
-    >>> jane.handle_shot(1, 0)
-    Hit!
-    You sunk my Destroyer
-
-    >>> jane.show_board(tight=True)
-      0 1 2 3 4 5 6 7 8 9
-    0 # # . . . . . . . .
-    1 . . . . . . . . . .
-    2 . . . . . . . . . .
-    3 . . . . . . . . . .
-    4 . . . . . . . . . .
-    5 . . . . . . . . . .
-    6 . . . . . . . . . .
-    7 . . . . . . . _ . .
-    8 . . . . . . . . _ .
-    9 . . . . . . . . . .
-
-
-And, of course, it should tell her opponent when they repeat actions:
-
-    >>> jane.handle_shot(0, 0)
-    Traceback (most recent call last):
-    ...
-    ValueError: You've already played there
-
-    >>> jane.handle_shot(8, 8)
-    Traceback (most recent call last):
-    ...
-    ValueError: You've already played there
-
-Since Jane has some ships left, she hasn't lost::
-
-    >>> jane.is_dead()
-    False
-There are two unimplemented methods:
-
-The Ship.place method:
-
-class Ship(object):  # ...
-    def place(self, col, row, direction):
-        """Place ship.
-
-        Given a row and column and direction, determine coordinates
-        ship will occupy and update it's coordinates property.
-
-        Raises an exception for an illegal direction.
-
-        This is meant to be an abstract class--you should subclass it
-        for individual ship types.
-
-            >>> class TestShip(Ship):
-            ...     _length = 3
-            ...     name = "Test Ship"
-
-        Let's make a ship and place it:
-
-            >>> ship = TestShip()
-
-            >>> ship.place(1, 2, "H")
-            >>> ship.coords
-            [(1, 2), (2, 2), (3, 2)]
-
-            >>> ship.place(1, 2, "V")
-            >>> ship.coords
-            [(1, 2), (1, 3), (1, 4)]
-
-        Illegal directions raise an error:
-
-            >>> ship.place(1, 2, "Z")
-            Traceback (most recent call last):
-            ...
-            ValueError: Illegal direction
-        """ 

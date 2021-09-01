@@ -1,7 +1,21 @@
+Distractions/Rewards:
+- beard
+- ztr video, choose wedding image
+
 Fixes:
 
 Requirements:
-- Create objects - Ships, Players, Board, 
+- Create classes 
+  - Board
+  - Player
+  - Ships 
+- create methods inside of classes 
+- create instances of classes
+  - computer hidden board
+  - computer guess board
+  - player hidden board
+  - player guess board
+
 
 Legend:
 " " available to guess
