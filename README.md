@@ -1,6 +1,5 @@
 Distractions/Rewards:
-- beard
-- ztr video, choose wedding image
+
 
 Fixes:
 

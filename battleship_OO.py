@@ -20,8 +20,12 @@ class Player:
   def __init__(self, name):
     self.name = name
     self.ships = []
-  def place_ship(self, ship):
-    self.ships.append(ship)
+  #take turn placing ships
+  def take_turn(self, board):
+    for ship in self.ships:
+      print(f"{self.name} place your {ship.name}")
+      ship.place_ship(board)
+
 
 #ship class
 class Ship:
