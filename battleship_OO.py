@@ -1,115 +1,57 @@
-from random import randint
+class Battleship:
+  def __init__(self, name, size, location):
+      self.name = name
+      self.size = size
+      self.location = location
+      self.hit = False
+      self.sunk = False
+      self.ships = []
+      self.ships.append(Battleship("Aircraft Carrier", 5, [1, 1]))
+      self.ships.append(Battleship("Battleship", 4, [1, 2]))
+      self.ships.append(Battleship("Submarine", 3, [1, 3]))
+      self.ships.append(Battleship("Destroyer", 3, [1, 4]))
+      self.ships.append(Battleship("Patrol Boat", 2, [1, 5]))
+  def hit_ship(self):
+      self.hit = True
+      return self.hit
+  def sunk_ship(self):
+      self.sunk = True
+      return self.sunk
+  def get_ship_type(self):
+      return self.ship_type
+  def get_ship_size(self):
+      return self.ship_size
+  def get_ship_location(self):
+      return self.location
+  def get_ship_name(self):
+      return self.name
 
-#battleship board class
-class Board:
+class board:
   def __init__(self, size):
-    self.size = size
-    self.board = []
-    for i in range(size):
-      self.board.append([" "] * size)
+      self.size = size
+      self.board = []
+      for i in range(size):
+          self.board.append(["O"] * size)
   def print_board(self):
-    print("  A B C D E F G H")
-    print("  +-+-+-+-+-+-+-+")
-    row_number = 1
-    for row in self.board:
-      print("%d|%s|" % (row_number, "|".join(row)))
-      row_number += 1
+      for row in self.board:
+          print(" ".join(row))
+  def get_board(self):
+      return self.board
 
-#player class
 class Player:
-  def __init__(self, name):
-    self.name = name
-    self.ships = []
-  #take turn placing ships
-  def take_turn(self, board):
-    for ship in self.ships:
-      print(f"{self.name} place your {ship.name}")
-      ship.place_ship(board)
+  def __init__(self, name, board):
+      self.name = name
+      self.board = board
 
+if __name__ == '__main__':
+  #create instance of players
+  player1 = Player("Player", "board")
+  computer = Player("Computer", "board")
+  print(player1.name)
+  print(computer.name)
 
-#ship class
-class Ship:
-  def __init__(self, name, size, row, col):
-    self.name = name
-    self.size = size
-    self.row = row
-    self.col = col
-    self.hit = False
+  
 
-#battleship game class
-class Game:
-  def __init__(self, size):
-    self.size = size
-    self.board = Board(size)
-    self.ship_sizes = [5, 4, 3, 3, 2]
-    self.ships = []
-    self.guess_board = []
-    self.hit_count = 0
-    self.miss_count = 0
-    self.ship_count = 0
-    self.ship_hit_count = []
-    self.ship_miss_count = []
-    for ship_size in self.ship_sizes:
-      self.ships.append(Ship(ship_size))
-    self.place_ships()
-  def place_ships(self):
-    for ship in self.ships:
-      while True:
-        x = randint(0, self.size - 1)
-        y = randint(0, self.size - 1)
-        if self.board.board[x][y] == " ":
-          self.board.board[x][y] = ship.symbol
-          self.board.print_board()
-          break
-  def guess(self, x, y):
-    if self.board.board[x][y] == " ":
-      self.board.board[x][y] = "X"
-      self.guess_board[x][y] = "X"
-      self.miss_count += 1
-      return False
-    else:
-      self.board.board[x][y] = "X"
-      self.guess_board[x][y] = "X"
-      self.hit_count += 1
-      return True
-  def check_win(self):
-    for ship in self.ships:
-      if ship.hit_count == ship.size:
-        return True
-    return False
-  def check_loss(self):
-    if self.miss_count == 5:
-      return True
-    return False
-  def check_ship_loss(self, ship):
-    if ship.miss_count == ship.size:
-      return True
-    return False
-  def check_ship_win(self, ship):
-    if ship.hit_count == ship.size:
-      return True
-    return False
-  def check_all_ships_sunk(self):
-    for ship in self.ships:
-      if not self.check_ship_loss(ship):
-        return False
-    return True
-  def check_all_ships_hit(self):
-    for ship in self.ships:
-      if not self.check_ship_win(ship):
-        return False
-    return True
-
-#create instance of boards
-battleship_board = Board(8)
-battleship_guess_board = Board(8)
-
-#create instance of players
-battleship_player = Player("Player 1")
-battleship_ai = Player("Player 2")
-
-#create instance of game
-battleship_game = Game(8)
 
 
 
