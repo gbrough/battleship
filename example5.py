@@ -74,7 +74,6 @@ class Battleship(object):
     def is_destroyed(self):
         return all(self.hits)
 
-
 class Player(object):
 
     def __init__(self, name, shot_f):
