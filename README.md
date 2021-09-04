@@ -4,16 +4,8 @@ Distractions/Rewards:
 Fixes:
 
 Requirements:
-- Create classes 
-  - Board
-  - Player
-  - Ships 
-- create methods inside of classes 
-- create instances of classes
-  - computer hidden board
-  - computer guess board
-  - player hidden board
-  - player guess board
+- Place ships on board
+- Test if ships were placed correctly
 
 
 Legend:

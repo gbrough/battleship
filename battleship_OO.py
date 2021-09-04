@@ -1,20 +1,23 @@
-class Battleship:
-  def __init__(self, name, size, location):
+class Battleship(object):
+  def __init__(self, name, size, direction):
       self.name = name
       self.size = size
-      self.location = location
+      self.direction = direction
+  def get_ship_direction(self):
+    if self.direction == 'h':
+      return 'horizontal'
+    else:
+      return 'vertical'
   def get_ship_name(self):
       return self.name
   def get_ship_size(self):
       return self.size
-  def get_ship_location(self):
-      return self.location
 
 class board:
-  def __init__(self, battleship, width, height):
-      self.battleship = battleship
+  def __init__(self, player, width, height):
       self.width = width
       self.height = height
+      self.player = player
       self.board = []
       for i in range(height):
           self.board.append([])
@@ -31,21 +34,23 @@ class Player:
 
 def run():
   battleships = [
-      Battleship("Aircraft Carrier", 5, [0,0]),
-      Battleship("Battleship", 4, [0,1]),
-      Battleship("Submarine", 3, [0,2]),
-      Battleship("Destroyer", 3, [0,3]),
-      Battleship("Patrol Boat", 2, [0,4])
+      Battleship("Aircraft Carrier", 5),
+      Battleship("Battleship", 4),
+      Battleship("Submarine", 3),
+      Battleship("Destroyer", 3),
+      Battleship("Patrol Boat", 2)
   ]
-  #create players
-  user = Player("user", board(battleships[0], 5, 5))
-  computer = Player("computer", board(battleships[0], 5, 5))
-  #place ships
-  user.board.battleship.location = [0,0]
-  computer.board.battleship.location = [0,0]
-  #print board
-  user.board.print_board()
-  computer.board.print_board()
+  print(battleships)
+  #create players and boards
+  user = Player("Player 1", board(5, 5))
+  computer = Player("Computer", board(5, 5))
+  #place user battle ships
+  b1 = battleships[0]
+  
+
+  
+
+ 
 
 if __name__ == '__main__':
   run()
