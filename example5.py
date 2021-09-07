@@ -80,7 +80,6 @@ class Player(object):
         self.name = name
         self.shot_f = shot_f
 
-
 def render_basic(game_board, show_battleships=False):
     header = "+" + "-" * game_board.width + "+"
     print(header)
@@ -129,7 +128,6 @@ def render_basic(game_board, show_battleships=False):
         print("|" + "".join(row) + "|")
 
     print(header)
-
 
 # type, metadata (player,...)
 def announce_en(event_type, metadata={}):

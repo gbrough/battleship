@@ -4,13 +4,13 @@ Distractions/Rewards:
 Fixes:
 
 Requirements:
-- Place ships on board
-- Test if ships were placed correctly
-
+- statically place 5 ships on hidden board
+- User guesses 
 
 Legend:
 " " available to guess
- X is hit on guess board
+O is a placed ship
+ X is hit ship
  - is miss
 
 Game types/videos: 

@@ -1,5 +1,5 @@
 class Battleship(object):
-  def __init__(self, name, size, direction):
+  def __init__(self, name, size, location, direction):
       self.name = name
       self.size = size
       self.direction = direction
@@ -42,16 +42,12 @@ def run():
   ]
   print(battleships)
   #create players and boards
-  user = Player("Player 1", board(5, 5))
+  user = Player("user", board(5, 5))
   computer = Player("Computer", board(5, 5))
   #place user battle ships
-  b1 = battleships[0]
   
-
+  print(battleships)
   
-
- 
-
 if __name__ == '__main__':
   run()
 
