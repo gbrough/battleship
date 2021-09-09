@@ -5,7 +5,7 @@ Fixes:
 
 Requirements:
 - statically place 5 ships on hidden board
-- User guesses 
+- User has 10 guesses
 
 Legend:
 " " available to guess
