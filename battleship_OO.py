@@ -1,31 +1,30 @@
 class Battleship(object):
 
-  @staticmethod
-  def build(head, length, direction):
-      body = []
-      for i in range(length):
-          if direction == "N":
-              el = (head[0], head[1] - i)
-          elif direction == "S":
-              el = (head[0], head[1] + i)
-          elif direction == "W":
-              el = (head[0] - i, head[1])
-          elif direction == "E":
-              el = (head[0] + i, head[1])
-
-          body.append(el)
-
-      return Battleship(body, direction)
+  def place_ship(self, board, coordinate_x, coordinate_y, length, direction):
+    for i in range(length):
+        if direction == "N":
+            el = (coordinate_x[0], coordinate_y[1] - i)
+            board.add_ship(el)
+        elif direction == "S":
+            el = (coordinate_x[0], coordinate_y[1] + i)
+            board.add_ship(el)
+        elif direction == "W":
+            el = (coordinate_x[0] - i, coordinate_y[1])
+            board.add_ship(el)
+        elif direction == "E":
+            el = (coordinate_x[0] + i, coordinate_y[1])
+            board.add_ship(el)
+        else:
+            print("Wrong direction")
+            return False
 
   def __init__(self, body, direction):
       self.body = body
       self.direction = direction
-      self.hits = [False] * len(body)
 class board:
-  def __init__(self, player, width, height):
+  def __init__(self, width, height):
       self.width = width
       self.height = height
-      self.player = player
       self.board = []
       for i in range(height):
           self.board.append([])
@@ -35,21 +34,7 @@ class board:
       for i in range(self.height):
           print(self.board[i])
   
-  def place_ship(self, ship, head, direction):
-      if direction == "N":
-          for i in range(ship.length):
-              self.board[head[0] - i][head[1]] = 'S'
-      elif direction == "S":
-          for i in range(ship.length):
-              self.board[head[0] + i][head[1]] = 'S'
-      elif direction == "W":
-          for i in range(ship.length):
-              self.board[head[0]][head[1] - i] = 'S'
-      elif direction == "E":
-          for i in range(ship.length):
-              self.board[head[0]][head[1] + i] = 'S'
-    
-    
+
         
 class Player:
   def __init__(self, name, board):
@@ -57,27 +42,16 @@ class Player:
       self.board = board
 
 def run():
-  battleships = [
-      Battleship.build((0, 0), 2, 'E'),
-      Battleship.build((1, 0), 3, 'E'),
-      Battleship.build((2, 0), 3, 'E'),
-      Battleship.build((3, 0), 4, 'E'),
-      Battleship.build((4, 0), 5, 'E')
-        ]
-  print(battleships)
-  #create players and boards
-  user = Player("user", (5, 5))
-  computer = Player("Computer",(5, 5))
-  #place battleships on boards
-  for ship in battleships:
-      user.board.place_ship(ship)
-      computer.board.place_ship(ship)
-  #print boards
-  user.board.print_board()
-  computer.board.print_board()
+  user_board = board(8, 8)
+  user = Player("user", user_board)
+  computer = Player("Computer",(8, 8))
+  #place battleships
+  Battleship.place_ship(user_board, 0, 0, 5, 'E')
+  Battleship.place_ship(user_board, 0, -1, 4, 'E')
+  Battleship.place_ship(user_board, 0, -2, 3, 'E')
+  Battleship.place_ship(user_board, 0, -3, 3, 'E')
+  Battleship.place_ship(user_board, 0, -4, 2, 'E')
 
-  
-  print(battleships)
   
 if __name__ == '__main__':
   run()
