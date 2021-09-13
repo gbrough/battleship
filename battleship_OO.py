@@ -1,34 +1,20 @@
-class Battleship(object):
-  def __init__(self, board, row, column, length, direction):
-    self.board = board
-    self.row = row
-    self.column = column
-    self.length = length
-    self.direction = direction
+from random import randint  
 
-  def place_ship(self, board, row, column, length, direction):
-    for i in range(length):
-        if direction == "N":
-            el = (row[0], column[1] - i)
-            board.add_ship(el)
-        elif direction == "S":
-            el = (row[0], column[1] + i)
-            board.add_ship(el)
-        elif direction == "W":
-            el = (row[0] - i, column[1])
-            board.add_ship(el)
-        elif direction == "E":
-            el = (row[0] + i, column[1])
-            board.add_ship(el)
-        else:
-            print("Wrong direction")
-            return False
-
-class board:
-  def __init__(self):
+class Player:
+  def __init__(self, name, board):
+      self.name = name
+      self.board = board
+  def create_players(self):
+      self.user = Player("User", GameBoard())
+      self.computer = Player("Computer", GameBoard())
+class GameBoard:
+  def __init__(self, column):
       self.board = []
-  board = [[" "] * 8 for i in range(8)]
-  letters_to_numbers = {
+      self.column = column
+  def create_board(board):
+    board = [[" "] * 8 for i in range(8)]
+  def convert(self, column):
+    letters_to_numbers = {
     'A': 0,
     'B': 1,
     'C': 2,
@@ -37,30 +23,42 @@ class board:
     'F': 5,
     'G': 6,
     'H': 7
-  }
+    }
+    return letters_to_numbers[column]
   def print_board(self):
-      print("  0 1 2 3 4 5 6 7")
-      for i in range(8):
-          print(i, end=" ")
-          for j in range(8):
-              print(self.board[i][j], end=" ")
-          print()
+      print("  A B C D E F G H")
+      print("  +-+-+-+-+-+-+-+")
+      row_number = 1
+      for row in self.board:
+          print("%d|%s|" % (row_number, "|".join(row)))
+          row_number += 1
+class Battleship(object):
+  def __init__(self, board, row, column):
+    self.board = board
+    self.row = row
+    self.column = column
 
-class Player:
-  def __init__(self, name, board):
-      self.name = name
-      self.board = board
+  def get_ship_location(row, column):
+    row = input("Enter the row of the ship: ").upper()
+    while row not in "12345678":
+        print('Not an appropriate choice, please select a valid row')
+        row = input("Enter the row of the ship: ").upper()
+    column = input("Enter the column of the ship: ").upper()
+    while column not in "ABCDEFGH":
+        print('Not an appropriate choice, please select a valid column')
+        column = input("Enter the column of the ship: ").upper()
+    return int(row) - 1, GameBoard.convert.letters_to_numbers[column]
+
+  def create_ships(board, row, column):
+    for ship in range(5):
+      row, column = randint(0,7), randint(0,7)
+      while board[row[column] == "X":
+        row, column = randint(0,7), randint(0,7)
+      board[row[column] = "X"
+      print(self.board)
 
 def run():
-  user_board = board()
-  user = Player("user", user_board)
-  computer = Player("Computer",(8, 8))
-  #place battleships
-  Battleship.place_ship(user_board, 0, 0, 5, 'E')
-  Battleship.place_ship(user_board, 1, 0, 4, 'E')
-  Battleship.place_ship(user_board, 2, 0, 3, 'E')
-  Battleship.place_ship(user_board, 3, 0, 3, 'E')
-  Battleship.place_ship(user_board, 4, 0, 2, 'E')
+
   
 if __name__ == '__main__':
   run()
