@@ -11,7 +11,7 @@ class BattleshipTest(unittest.TestCase):
   def test_count_hit_ships_win_condition(self):
     board = [[" "] * 8 for x in range(8)]
     for i in range(6):
-      board[0][i] = "O"
+      board[0][i] = "X"
     print_board(board)
     count = count_hit_ships(board)
     self.assertGreater(count, 5)
