@@ -40,7 +40,6 @@ class Shot(object):
         self.location = location
         self.is_hit = is_hit
 
-
 class Battleship(object):
 
     @staticmethod

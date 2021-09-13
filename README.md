@@ -1,6 +1,5 @@
 Distractions/Rewards:
 
-
 Fixes:
 
 Requirements:
@@ -10,8 +9,8 @@ Requirements:
 Legend:
 " " available to guess
 O is a placed ship
- X is hit ship
- - is miss
+X is hit ship
+- is miss
 
 Game types/videos: 
 1. 1 player game. 
