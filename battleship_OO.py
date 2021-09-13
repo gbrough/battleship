@@ -1,57 +1,66 @@
 class Battleship(object):
+  def __init__(self, board, row, column, length, direction):
+    self.board = board
+    self.row = row
+    self.column = column
+    self.length = length
+    self.direction = direction
 
-  def place_ship(self, board, coordinate_x, coordinate_y, length, direction):
+  def place_ship(self, board, row, column, length, direction):
     for i in range(length):
         if direction == "N":
-            el = (coordinate_x[0], coordinate_y[1] - i)
+            el = (row[0], column[1] - i)
             board.add_ship(el)
         elif direction == "S":
-            el = (coordinate_x[0], coordinate_y[1] + i)
+            el = (row[0], column[1] + i)
             board.add_ship(el)
         elif direction == "W":
-            el = (coordinate_x[0] - i, coordinate_y[1])
+            el = (row[0] - i, column[1])
             board.add_ship(el)
         elif direction == "E":
-            el = (coordinate_x[0] + i, coordinate_y[1])
+            el = (row[0] + i, column[1])
             board.add_ship(el)
         else:
             print("Wrong direction")
             return False
 
-  def __init__(self, body, direction):
-      self.body = body
-      self.direction = direction
 class board:
-  def __init__(self, width, height):
-      self.width = width
-      self.height = height
+  def __init__(self):
       self.board = []
-      for i in range(height):
-          self.board.append([])
-          for j in range(width):
-              self.board[i].append('~')
+  board = [[" "] * 8 for i in range(8)]
+  letters_to_numbers = {
+    'A': 0,
+    'B': 1,
+    'C': 2,
+    'D': 3,
+    'E': 4,
+    'F': 5,
+    'G': 6,
+    'H': 7
+  }
   def print_board(self):
-      for i in range(self.height):
-          print(self.board[i])
-  
+      print("  0 1 2 3 4 5 6 7")
+      for i in range(8):
+          print(i, end=" ")
+          for j in range(8):
+              print(self.board[i][j], end=" ")
+          print()
 
-        
 class Player:
   def __init__(self, name, board):
       self.name = name
       self.board = board
 
 def run():
-  user_board = board(8, 8)
+  user_board = board()
   user = Player("user", user_board)
   computer = Player("Computer",(8, 8))
   #place battleships
   Battleship.place_ship(user_board, 0, 0, 5, 'E')
-  Battleship.place_ship(user_board, 0, -1, 4, 'E')
-  Battleship.place_ship(user_board, 0, -2, 3, 'E')
-  Battleship.place_ship(user_board, 0, -3, 3, 'E')
-  Battleship.place_ship(user_board, 0, -4, 2, 'E')
-
+  Battleship.place_ship(user_board, 1, 0, 4, 'E')
+  Battleship.place_ship(user_board, 2, 0, 3, 'E')
+  Battleship.place_ship(user_board, 3, 0, 3, 'E')
+  Battleship.place_ship(user_board, 4, 0, 2, 'E')
   
 if __name__ == '__main__':
   run()
