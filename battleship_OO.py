@@ -8,8 +8,8 @@ class Player:
       self.user = Player("User", GameBoard())
       self.computer = Player("Computer", GameBoard())
 class GameBoard:
-  def __init__(self, column):
-      self.board = []
+  def __init__(self, board, column):
+      self.board = board
       self.column = column
   def create_board(board):
     board = [[" "] * 8 for i in range(8)]
