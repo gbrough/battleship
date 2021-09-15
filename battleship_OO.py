@@ -50,7 +50,6 @@ class Battleship():
         print('Not an appropriate choice, please select a valid column')
         column = input("Enter the column of the ship: ").upper()
     return int(row) - 1, self.letters_to_numbers[column]
-
 class RunGame():
   def __init__(self):
     user1 = Player("Garrett")
