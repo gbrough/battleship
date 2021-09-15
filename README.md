@@ -1,3 +1,4 @@
+``` 
 Distractions/Rewards:
 
 Fixes:
@@ -6,13 +7,14 @@ Requirements:
 - statically place 5 ships on hidden board
 - User has 10 guesses
 
-Legend:
-" " available to guess
-O is a placed ship
-X is hit ship
-- is miss
 
-Game types/videos: 
+Legend:
+  " " available to guess
+  O is a placed ship
+  X is hit ship
+  "-" is miss
+
+Game types 
 1. 1 player game. 
   - Computer randomly places 5 ships, player has 10 guesses
 2. Advanced with computer  
@@ -29,7 +31,7 @@ Game types/videos:
   - Computer Guess 
     - Picker center, then checkerboard guess strategy
     - If hit, computer plays adjacent to ship
-
+```
 
 
 
