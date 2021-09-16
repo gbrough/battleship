@@ -15,15 +15,16 @@ Legend:
   "-" is miss
 
 Game types 
-1. 1 player game. 
+1. battleship_single_player.py 
   - Computer randomly places 5 ships, player has 10 guesses
-2. Advanced with computer  
+2. battleship_advanced_with_computer.py  
   - player and computer place 5 single ships, both guess
   - take turns guessing, whichever one sinks all five first wins
-3. Advanced with computer and 5 ship types
+3. battleship_computer_5_ship_types.py
   - 5 different ship types - 2, 3, 3, 4, 5
-4. Rewrite Single Player to use Objects and Classes
-5. Algorithm Improvements
+4. battleship_OO.py
+  - Rewrite Single Player to use Objects and Classes
+5. Future algorithm considerations
   - tell user when ship is sunk
   - Computer Placement 
     - Place ships in center and not edges,
