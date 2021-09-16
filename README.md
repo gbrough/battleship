@@ -28,7 +28,6 @@ Distractions/Rewards:
 Bugs:
 
 Requirements:
-- column not converting letters to numbers
 - attributes needed for Battleship or RunGame class
 
 
