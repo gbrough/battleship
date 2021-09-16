@@ -28,7 +28,7 @@ Distractions/Rewards:
 Bugs:
 
 Requirements:
-- attributes needed for Battleship or RunGame class
+- attributes needed for GameBoard and Battleship
 
 
 
