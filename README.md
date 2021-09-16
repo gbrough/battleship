@@ -8,7 +8,7 @@ Game types
 3. battleship_computer_5_ship_types.py
   - 5 different ship types - 2, 3, 3, 4, 5
 4. battleship_OO.py
-  - Rewrite Single Player to use Objects and Classes
+  - Rewrite Single Player to use Object oriented programming
 5. Future algorithm considerations
   - tell user when ship is sunk
   - Computer Placement 
@@ -22,15 +22,14 @@ Legend:
   " " available to guess
   X is hit ship
   "-" is miss
-  
+
 Distractions/Rewards:
 
-Fixes:
+Bugs:
 
 Requirements:
-- statically place 5 ships on hidden board
-- User has 10 guesses
-
+- column not converting letters to numbers
+- attributes needed for Battleship or RunGame class
 
 
 
