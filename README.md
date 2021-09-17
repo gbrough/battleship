@@ -23,15 +23,6 @@ Legend:
   X is hit ship
   "-" is miss
 
-Distractions/Rewards:
-
-Bugs:
-
-Requirements:
-- attributes needed for GameBoard and Battleship
-
-
-
 ```
 
 
