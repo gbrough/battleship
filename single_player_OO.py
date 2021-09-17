@@ -54,13 +54,13 @@ def RunGame():
   computer_board = GameBoard([[" "] * 8 for i in range(8)])
   user_guess_board = GameBoard([[" "] * 8 for i in range(8)])
   Battleship.create_ships(computer_board)
-  GameBoard.print_board(computer_board)
   #start 10 turns
   turns = 10
   while turns > 0:
     GameBoard.print_board(user_guess_board)
     #get user input
     user_x_row, user_y_column = Battleship.get_user_input(object)
+    #check if duplicate guess
     while user_guess_board.board[user_x_row][user_y_column] == "-" or user_guess_board.board[user_x_row][user_y_column] == "X":
       print("You guessed that one already")
       user_x_row, user_y_column = Battleship.get_user_input(object)
