@@ -32,7 +32,7 @@ class Battleship:
       while x_row not in '12345678':
           print('Not an appropriate choice, please select a valid row')
           x_row = input("Enter the row of the ship: ")
-          
+
       y_column = input("Enter the column letter of the ship: ").upper()
       while y_column not in "ABCDEFGH":
           print('Not an appropriate choice, please select a valid column')
@@ -61,6 +61,9 @@ def RunGame():
     GameBoard.print_board(user_guess_board)
     #get user input
     user_x_row, user_y_column = Battleship.get_user_input(object)
+    while user_guess_board.board[user_x_row][user_y_column] == "-" or user_guess_board.board[user_x_row][user_y_column] == "X":
+      print("You guessed that one already")
+      user_x_row, user_y_column = Battleship.get_user_input(object)
     #check for hit or miss
     if computer_board.board[user_x_row][user_y_column] == "X":
       print("You sunk 1 of my battleship!")
@@ -82,16 +85,3 @@ def RunGame():
 
 if __name__ == '__main__':
   RunGame()
-
-
-
-
-
-
-
-  
-
-
-
-
-
