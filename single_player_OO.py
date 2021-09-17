@@ -26,21 +26,6 @@ class Battleship:
       self.board[self.x_row][self.y_column] = "X"
     return self.board
   
-  def get_user_input(self):
-    try:
-      x_row = input("Enter the row of the ship: ")
-      while x_row not in "12345678":
-          print('Not an appropriate choice, please select a valid row')
-          x_row = input("Enter the row of the ship: ")
-      y_column = input("Enter the column letter of the ship: ").upper()
-      while y_column not in "ABCDEFGH":
-          print('Not an appropriate choice, please select a valid column')
-          y_column = input("Enter the column letter of the ship: ").upper()
-      return int(x_row) - 1, GameBoard.get_letters_to_numbers()[y_column]
-    except ValueError and KeyError:
-      print("Not a valid input")
-      return Battleship.get_user_input()
-
   def count_hit_ships(self):
     hit_ships = 0
     for row in self.board:
@@ -48,7 +33,35 @@ class Battleship:
         if column == "X":
           hit_ships += 1
     return hit_ships
-    
+
+  def user_guess(self):
+    self.guess_row = input("Guess Row: ")
+    self.guess_column = input("Guess Column: ")
+    self.guess_row = self.guess_row.upper()
+    self.guess_column = self.guess_column.upper()
+    self.guess_row = self.board.get_letters_to_numbers()[self.guess_row]
+    if self.board[self.guess_row][self.guess_column] == "X":
+      self.board[self.guess_row][self.guess_column] = "H"
+    else:
+      self.board[self.guess_row][self.guess_column] = "M"
+    return self.board
+
+def get_user_input(self):
+  try:
+    x_row = input("Enter the row of the ship: ")
+    while x_row not in "12345678":
+        print('Not an appropriate choice, please select a valid row')
+        x_row = input("Enter the row of the ship: ")
+    y_column = input("Enter the column letter of the ship: ").upper()
+    while y_column not in "ABCDEFGH":
+        print('Not an appropriate choice, please select a valid column')
+        y_column = input("Enter the column letter of the ship: ").upper()
+    return int(x_row) - 1, GameBoard.get_letters_to_numbers()[y_column]
+  except ValueError and KeyError:
+    print("Not a valid input")
+    return Battleship.get_user_input()
+
+
 def RunGame(): 
   computer_board = GameBoard([[" "] * 8 for i in range(8)])
   user_guess_board = GameBoard([[" "] * 8 for i in range(8)])
@@ -58,11 +71,8 @@ def RunGame():
   turns = 10
   while turns > 0:
     GameBoard.print_board(user_guess_board)
-    user_x_row, user_y_column = Battleship.get_user_input(object)
-    #check for duplicate guesses
-    while user_guess_board.board[user_x_row][user_y_column] == "-" or user_guess_board.board[user_x_row][user_y_column] == "X":
-      print("You guessed that one already")
-      user_x_row, user_y_column = Battleship.get_user_input(object)
+    #get user input
+
     #check for hit or miss
     if computer_board.board[user_x_row][user_y_column] == "X":
       print("You sunk 1 of my battleship!")
