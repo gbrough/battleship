@@ -22,7 +22,6 @@ Legend:
   " " available to guess
   X is hit ship
   "-" is miss
-
 ```
 
 
